@@ -1,9 +1,10 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
+
 
 const app = express();
 const port = 3000; // Default port to listen
 
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
     res.send('Welcome to Library Management API!');
 });
 

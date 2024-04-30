@@ -1,15 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es6",
     "module": "commonjs",
-    "lib": ["es2018"],
+    "target": "es2018",
     "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "skipLibCheck": true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "exclude": ["node_modules"]
 }
