@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import sequelize from './config/database';
 import bookRoutes from './routes/bookRoutes';
+import userRoutes from "./routes/userRoutes";
 
 const app = express();
 const port = 3000; // Default port to listen
@@ -14,6 +15,7 @@ sequelize.sync({ force: false }).then(() => {
 app.use(express.json());
 
 app.use('/books', bookRoutes);
+app.use('/users', userRoutes);
 
 app.get('/', (req: Request, res: Response) => {
     res.send('Welcome to Library Management API!');

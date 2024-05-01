@@ -1,5 +1,5 @@
 import {Model, DataTypes} from 'sequelize';
-import sequelize from '../config/database'; // Adjust the import path as necessary
+import sequelize from '../config/database';
 
 export class Book extends Model {
     public id!: number;
@@ -28,6 +28,6 @@ Book.init({
 }, {
     sequelize,
     modelName: 'Book',
-    tableName: 'books', // Ensure the table name is correct
-    timestamps: false   // Set to false if you do not have timestamp fields like createdAt or updatedAt
+    tableName: 'books',
+    timestamps: false
 });
