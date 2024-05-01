@@ -11,6 +11,8 @@ sequelize.sync({ force: false }).then(() => {
     console.log('Error connecting to db: ', err);
 });
 
+app.use(express.json());
+
 app.use('/books', bookRoutes);
 
 app.get('/', (req: Request, res: Response) => {

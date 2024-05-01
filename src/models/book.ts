@@ -1,7 +1,10 @@
-import { Model, DataTypes } from 'sequelize';
+import {Model, DataTypes} from 'sequelize';
 import sequelize from '../config/database'; // Adjust the import path as necessary
 
-export class Book extends Model {}
+export class Book extends Model {
+    public id!: number;
+    public name!: string;
+}
 
 Book.init({
     id: {
@@ -9,22 +12,9 @@ Book.init({
         autoIncrement: true,
         primaryKey: true
     },
-    title: {
+    name: {
         type: DataTypes.STRING(255),
         allowNull: false
-    },
-    author: {
-        type: DataTypes.STRING(100),
-        allowNull: false
-    },
-    isbn: {
-        type: DataTypes.STRING(13),
-        unique: true,
-        allowNull: true // ISBN can be null, adjust based on your business logic
-    },
-    published_date: {
-        type: DataTypes.DATEONLY,
-        allowNull: true // Allow null if published_date can be unspecified
     },
     available: {
         type: DataTypes.BOOLEAN,

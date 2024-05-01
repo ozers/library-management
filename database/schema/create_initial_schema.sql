@@ -11,10 +11,7 @@ CREATE TABLE users
 CREATE TABLE books
 (
     id             SERIAL PRIMARY KEY,
-    title          VARCHAR(255) NOT NULL,
-    author         VARCHAR(100) NOT NULL,
-    isbn           VARCHAR(13) UNIQUE,
-    published_date DATE,
+    name           VARCHAR(255) UNIQUE NOT NULL,
     available      BOOLEAN       DEFAULT TRUE,
     average_rating DECIMAL(3, 2) DEFAULT NULL
 );
@@ -27,8 +24,8 @@ CREATE TABLE transactions
     user_id        INT NOT NULL,
     borrowed_date  TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     return_date    TIMESTAMP WITHOUT TIME ZONE,
-    status         VARCHAR(50)   DEFAULT 'borrowed',
-    rating         DECIMAL(2, 1) DEFAULT NULL,
+    status         VARCHAR(50)                 DEFAULT 'borrowed',
+    rating         DECIMAL(2, 1)               DEFAULT NULL,
     FOREIGN KEY (book_id) REFERENCES books (id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
