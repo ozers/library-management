@@ -5,6 +5,7 @@ export const bookService = {
     add: async (bookData: any) => {
         return await Book.create(bookData);
     },
+
     calculateRating: (newRating: number, averageRating: number, borrowCount: number): number => {
         if (borrowCount === 0) return newRating
 
@@ -13,9 +14,11 @@ export const bookService = {
 
         return newTotalRating / (borrowCount + 1);
     },
+
     findAll: async () => {
         return await Book.findAll();
     },
+
     findById: async (id: number, transaction?: Transaction) => {
         return await Book.findByPk(id, {transaction});
     }

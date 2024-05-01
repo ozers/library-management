@@ -1,5 +1,5 @@
 import {Model, DataTypes} from 'sequelize';
-import sequelize from '../config/database'; // Ensure your sequelize instance is imported
+import sequelize from '../config/database';
 
 export class Transaction extends Model {
     public id!: number;
@@ -45,8 +45,12 @@ Transaction.init({
         allowNull: false
     },
     rating: {
-        type: DataTypes.NUMBER,
-        allowNull: true
+        type: DataTypes.DECIMAL(4, 2),
+        allowNull: true,
+        validate: {
+            min: 1,
+            max: 10
+        }
     }
 }, {
     sequelize,

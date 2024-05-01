@@ -5,14 +5,14 @@ import userRoutes from "./routes/userRoutes";
 import setupAssociations from "./utils/associations";
 
 const app = express();
-const port = 3000; // Default port to listen
+const port = 3000;
 
 setupAssociations();
 
 sequelize.sync({force: false}).then(() => {
     console.log('Database & associations setup completed');
 })
-    .catch((error) => {
+    .catch((error: any) => {
         console.error('Failed to synchronize database:', error);
     });
 
