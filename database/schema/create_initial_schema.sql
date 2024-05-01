@@ -13,7 +13,8 @@ CREATE TABLE books
     id             SERIAL PRIMARY KEY,
     name           VARCHAR(255) UNIQUE NOT NULL,
     available      BOOLEAN       DEFAULT TRUE,
-    average_rating DECIMAL(3, 2) DEFAULT NULL
+    average_rating DECIMAL(3, 2) DEFAULT NULL,
+    borrow_count   DECIMAL
 );
 
 -- Create the "transactions" table
@@ -29,3 +30,6 @@ CREATE TABLE transactions
     FOREIGN KEY (book_id) REFERENCES books (id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
+
+ALTER TABLE books
+    ADD COLUMN borrow_count INTEGER DEFAULT 0

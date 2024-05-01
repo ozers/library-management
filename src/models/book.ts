@@ -6,7 +6,7 @@ export class Book extends Model {
     public name!: string;
     public available!: boolean;
     public averageRating?: number;
-    // public calculateAverageRating!: () => Promise<number | null>;
+    public borrowCount!: number;
 }
 
 Book.init({
@@ -23,23 +23,21 @@ Book.init({
         type: DataTypes.BOOLEAN,
         defaultValue: true
     },
-    average_rating: {
+    averageRating: {
         type: DataTypes.DECIMAL(3, 2),
-        defaultValue: null, // Explicitly set default as null
-        allowNull: true
+        defaultValue: null,
+        allowNull: true,
+        field: 'average_rating'
+    },
+    borrowCount: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+        field: 'borrow_count'
     }
+
 }, {
     sequelize,
     modelName: 'Book',
     tableName: 'books',
     timestamps: false
 });
-//
-// Book.prototype.calculateAverageRating = async () => {
-//     const {sequelize} = this.constructor as typeof Model;
-//     const result = await sequelize.models.Transaction.findAll({
-//         attributes: [[sequelize.fn('AVG', sequelize.col('rating')), 'avgRating']],
-//         where: {bookId: this.id}
-//     });
-//     return result[0].getDataValue('avgRating');
-// };

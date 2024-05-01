@@ -57,6 +57,11 @@ export const borrowService = {
             if (!book) {
                 throw new Error('Book not found');
             }
+
+            const currentAverageRating =book.averageRating ?? 0;
+
+            book.averageRating = bookService.calculateRating(score, currentAverageRating, book.borrowCount);
+            book.borrowCount = (book.borrowCount) + 1;
             book.available = true;
             await book.save({ transaction: t });
 
