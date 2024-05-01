@@ -4,6 +4,9 @@ import sequelize from '../config/database';
 export class Book extends Model {
     public id!: number;
     public name!: string;
+    public available!: boolean;
+    public averageRating?: number;
+    // public calculateAverageRating!: () => Promise<number | null>;
 }
 
 Book.init({
@@ -31,3 +34,12 @@ Book.init({
     tableName: 'books',
     timestamps: false
 });
+//
+// Book.prototype.calculateAverageRating = async () => {
+//     const {sequelize} = this.constructor as typeof Model;
+//     const result = await sequelize.models.Transaction.findAll({
+//         attributes: [[sequelize.fn('AVG', sequelize.col('rating')), 'avgRating']],
+//         where: {bookId: this.id}
+//     });
+//     return result[0].getDataValue('avgRating');
+// };

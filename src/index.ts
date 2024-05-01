@@ -1,16 +1,20 @@
-import express, { Request, Response } from 'express';
+import express, {Request, Response} from 'express';
 import sequelize from './config/database';
 import bookRoutes from './routes/bookRoutes';
 import userRoutes from "./routes/userRoutes";
+import setupAssociations from "./utils/associations";
 
 const app = express();
 const port = 3000; // Default port to listen
 
-sequelize.sync({ force: false }).then(() => {
-    console.log('Database connected');
-}).catch((err: Error) => {
-    console.log('Error connecting to db: ', err);
-});
+setupAssociations();
+
+sequelize.sync({force: false}).then(() => {
+    console.log('Database & associations setup completed');
+})
+    .catch((error) => {
+        console.error('Failed to synchronize database:', error);
+    });
 
 app.use(express.json());
 
