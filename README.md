@@ -3,6 +3,13 @@
 This project is a Library Management System designed to manage books and users within a library, allowing operations
 such as borrowing and returning books, along with managing user details.
 
+## Technologies 
+
+- Node.js
+- PostgreSQL
+- Sequelize ORM
+- Docker
+
 ## Installation
 
 Follow these steps to set up and run the project:
