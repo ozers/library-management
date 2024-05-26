@@ -93,5 +93,5 @@ Here are the endpoints available:
 
 ## Contact
 
-For support or queries, reach out to [ozer.subasi@gmail.com](mailto:ozer.subasi@gmail.com)
+For support or queries, reach out to [ozersubasi.dev@gmail.com](mailto:ozersubasi.dev@gmail.com)
 
