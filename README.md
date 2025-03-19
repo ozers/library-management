@@ -1,95 +1,128 @@
 # Library Management System
 
-This project is a Library Management System designed to manage books and users within a library, allowing operations
-such as borrowing and returning books, along with managing user details.
+A robust Library Management System built with Node.js and PostgreSQL, designed to manage books and users within a library. The system supports operations such as borrowing and returning books, along with comprehensive user management.
+
+## Features
+
+- User management (create, read, update)
+- Book management (add, remove, update)
+- Book borrowing and returning system
+- Docker containerization for easy deployment
+- RESTful API architecture
+- PostgreSQL database with Sequelize ORM
 
 ## Technologies 
 
 - Node.js
 - PostgreSQL
 - Sequelize ORM
-- Docker
+- Docker & Docker Compose
+- Express.js
+
+## Prerequisites
+
+- Node.js (v14 or higher)
+- npm (v6 or higher)
+- Docker & Docker Compose
+- Git
 
 ## Installation
 
-Follow these steps to set up and run the project:
+1. **Clone the repository**:
+   ```bash
+   # Using HTTPS
+   git clone https://github.com/ozers/library-management.git
+   
+   # Using SSH
+   git clone git@github.com:ozers/library-management.git
+   
+   # Using GitHub CLI
+   gh repo clone ozers/library-management
+   ```
 
-### Prerequisites
+2. **Navigate to project directory**:
+   ```bash
+   cd library-management
+   ```
 
-- Node.js
-- npm
-- Docker
-
-### Setup
-
-### Setup
-
-1. **Clone the repository** (choose one of the methods below):
-   - HTTPS:
-     ```bash
-     git clone https://github.com/ozers/library-management.git
-     ```
-   - SSH:
-     ```bash
-     git clone git@github.com:ozers/library-management.git
-     ```
-   - GitHub CLI:
-     ```bash
-     gh repo clone ozers/library-management
-     ```
-
-2. **Navigate into the project directory**:
-    ```bash
-    cd library-management
-    ```
-
-3. **Install the required npm packages**:
-    ```bash
-    npm install
-    ```
+3. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
 4. **Build the project**:
-    ```bash
-    npm run build
-    ```
+   ```bash
+   npm run build
+   ```
 
-5. **Navigate to the Docker directory and start the services using Docker Compose**:
-    ```bash
-    cd docker
-    docker-compose up
-    ```
+5. **Start the services**:
+   ```bash
+   cd docker
+   docker-compose up
+   ```
 
-### Database Initialization
+## Database Setup
 
-1. After starting the Docker services, set up the initial database schema:
-   - Navigate to `database/schema` and run the SQL script `create_initial_schema.sql` against your PostgreSQL instance.
+1. **Initialize the database schema**:
+   - Navigate to `database/schema`
+   - Run `create_initial_schema.sql` against your PostgreSQL instance
 
-2. Seed the database:
-   - Navigate to `database/seeds` and run `1_seed_users_and_books_tables.sql` to populate the users and books tables
-     with initial data.
+2. **Seed the database**:
+   - Navigate to `database/seeds`
+   - Run `1_seed_users_and_books_tables.sql` to populate initial data
 
-## Using the API
+## API Documentation
 
-Once the application is running and the database is set up:
+The API is available at `http://localhost:3000`
 
-- Use the provided API Endpoints below to interact with the API.
-- The collection includes predefined requests for all available API endpoints, such as retrieving users, adding new
-  users, fetching book details, borrowing and returning books.
+### Endpoints
 
-### API Endpoints
+#### Users
+- `GET /users` - Fetch all users
+- `GET /user/:userId` - Fetch specific user by ID
+- `POST /users` - Create a new user
 
-- APIs will be available on localhost:3000
+#### Books
+- `GET /books` - Fetch all books
+- `GET /book/:bookId` - Fetch specific book by ID
+- `POST /books` - Add a new book
 
-Here are the endpoints available:
+#### Book Operations
+- `POST /users/{userId}/borrow/{bookId}` - Record book borrowing
+- `POST /users/{userId}/return/{bookId}` - Record book return
 
-- `GET /users`: Fetch all users.
-- `GET /user/:userId`: Fetch the specific user by userId.
-- `POST /users`: Add a new user.
-- `GET /books`: Fetch all books.
-- `GET /book/:bookId`: Fetch the specific book by bookId.
-- `POST /books`: Add a new book.
-- `POST /users/{userId}/borrow/{bookId}`: Record that a user has borrowed a book.
-- `POST /users/{userId}/return/{bookId}`: Record that a user has returned a book.
+## Project Structure
+
+```
+library-management/
+├── src/                    # Source code
+├── database/              # Database related files
+│   ├── schema/           # Database schema
+│   └── seeds/            # Seed data
+├── docker/               # Docker configuration
+├── tests/                # Test files
+└── docs/                 # Documentation
+```
+
+## Development
+
+To run the application in development mode:
+```bash
+npm run dev
+```
+
+To run tests:
+```bash
+npm test
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## Contact
 
