@@ -25,6 +25,7 @@ A robust Library Management System built with Node.js and PostgreSQL, designed t
 - npm (v6 or higher)
 - Docker & Docker Compose
 - Git
+- PostgreSQL client tools (psql, createdb)
 
 ## Installation
 
@@ -63,6 +64,30 @@ A robust Library Management System built with Node.js and PostgreSQL, designed t
 
 ## Database Setup
 
+You can initialize the database in two ways:
+
+### Option 1: Using the initialization script (Recommended)
+
+The project includes a shell script that automates the database initialization process:
+
+```bash
+# Make the script executable
+chmod +x database/init_db.sh
+
+# Run the initialization script
+./database/init_db.sh
+```
+
+This script will:
+1. Create the database if it doesn't exist
+2. Execute the schema creation script
+3. Run all seed files in order
+4. Provide colored output for better visibility
+
+### Option 2: Manual Setup
+
+If you prefer to set up the database manually:
+
 1. **Initialize the database schema**:
    - Navigate to `database/schema`
    - Run `create_initial_schema.sql` against your PostgreSQL instance
@@ -74,6 +99,13 @@ A robust Library Management System built with Node.js and PostgreSQL, designed t
 ## API Documentation
 
 The API is available at `http://localhost:3000`
+
+### API Testing
+
+You can test the API using either:
+
+1. **Postman Collection**: Import the collection from `docs/postman_collection.json`
+2. **Curl Commands**: Use the curl commands provided in `docs/curl_commands.md`
 
 ### Endpoints
 
@@ -98,8 +130,12 @@ library-management/
 ├── src/                    # Source code
 ├── database/              # Database related files
 │   ├── schema/           # Database schema
-│   └── seeds/            # Seed data
+│   ├── seeds/            # Seed data
+│   └── init_db.sh        # Database initialization script
 ├── docker/               # Docker configuration
+├── docs/                 # Documentation
+│   ├── postman_collection.json  # Postman collection
+│   └── curl_commands.md        # Curl commands for API testing
 ├── tests/                # Test files
 └── docs/                 # Documentation
 ```

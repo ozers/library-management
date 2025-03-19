@@ -1,0 +1,126 @@
+{
+    "info": {
+      "name": "Library Management API",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Users",
+        "item": [
+          {
+            "name": "Get All Users",
+            "request": {
+              "method": "GET",
+              "url": "http://localhost:3000/users",
+              "description": "Retrieve all users from the system"
+            }
+          },
+          {
+            "name": "Get User by ID",
+            "request": {
+              "method": "GET",
+              "url": "http://localhost:3000/users/{{userId}}",
+              "description": "Retrieve a specific user by ID"
+            }
+          },
+          {
+            "name": "Create New User",
+            "request": {
+              "method": "POST",
+              "url": "http://localhost:3000/users",
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\"\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "description": "Create a new user in the system"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Books",
+        "item": [
+          {
+            "name": "Get All Books",
+            "request": {
+              "method": "GET",
+              "url": "http://localhost:3000/books",
+              "description": "Retrieve all books from the system"
+            }
+          },
+          {
+            "name": "Get Book by ID",
+            "request": {
+              "method": "GET",
+              "url": "http://localhost:3000/books/{{bookId}}",
+              "description": "Retrieve a specific book by ID"
+            }
+          },
+          {
+            "name": "Add New Book",
+            "request": {
+              "method": "POST",
+              "url": "http://localhost:3000/books",
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"title\": \"The Great Gatsby\",\n    \"author\": \"F. Scott Fitzgerald\",\n    \"isbn\": \"978-0743273565\",\n    \"available\": true\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "description": "Add a new book to the system"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Borrow Operations",
+        "item": [
+          {
+            "name": "Borrow Book",
+            "request": {
+              "method": "POST",
+              "url": "http://localhost:3000/users/{{userId}}/borrow/{{bookId}}",
+              "description": "Borrow a book for a user"
+            }
+          },
+          {
+            "name": "Return Book",
+            "request": {
+              "method": "POST",
+              "url": "http://localhost:3000/users/{{userId}}/return/{{bookId}}",
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"rating\": 5\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "description": "Return a borrowed book with rating"
+            }
+          }
+        ]
+      }
+    ],
+    "variable": [
+      {
+        "key": "userId",
+        "value": "1",
+        "type": "string"
+      },
+      {
+        "key": "bookId",
+        "value": "1",
+        "type": "string"
+      }
+    ]
+  }

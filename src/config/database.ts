@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize';
 
-const sequelize = new Sequelize('library_db', 'library_admin', 'library_admin_pw', {
+const sequelize = new Sequelize('library_db', 'postgres', 'postgres', {
     host: 'db',
     dialect: 'postgres'
 });
