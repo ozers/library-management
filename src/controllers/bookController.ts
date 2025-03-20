@@ -4,6 +4,7 @@ import {Book} from "../models/book";
 
 export const bookController = {
     getAllBooks: async (req: Request, res: Response) => {
+        debugger // look for debug!
         try {
             const books = await bookService.findAll();
             if (!books) {

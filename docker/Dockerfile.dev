@@ -1,0 +1,20 @@
+FROM node:20
+
+WORKDIR /usr/src/app
+
+# Install dependencies first (better layer caching)
+COPY package*.json ./
+COPY tsconfig.json ./
+
+RUN npm install
+
+# We'll mount the source code as a volume in docker-compose
+# This is just a fallback if no volume is mounted
+COPY . .
+
+RUN npm run build
+
+EXPOSE 3000 9229
+
+# Keep the container running
+CMD [ "node", "--inspect=0.0.0.0:9229", "dist/index.js" ] 

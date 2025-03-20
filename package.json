@@ -6,7 +6,8 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "build": "tsc",
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "debug": "node --inspect=0.0.0.0:9229 -r ts-node/register src/index.ts"
   },
   "keywords": [],
   "author": "",
