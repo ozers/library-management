@@ -23,7 +23,7 @@ const sequelize = new Sequelize(
     dbConfig
 );
 
-const testConnection = async (): Promise<void> => {
+export const testConnection = async (): Promise<void> => {
     try {
         await sequelize.authenticate();
         console.log('Database connection has been established successfully.');
@@ -32,7 +32,5 @@ const testConnection = async (): Promise<void> => {
         process.exit(1);
     }
 };
-
-testConnection();
 
 export default sequelize;

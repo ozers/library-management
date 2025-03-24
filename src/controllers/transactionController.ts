@@ -1,52 +1,49 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import * as transactionService from '../services/transactionService';
+import { NotFoundError, BusinessLogicError } from '../utils/errors';
 
-export const getUserTransactions = async (req: Request, res: Response): Promise<void> => {
+export const getUserTransactions = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
     try {
         const userId = Number(req.params.userId);
         
         if (isNaN(userId)) {
-            res.status(400).json({ message: 'Invalid user ID' });
-            return;
+            throw new BusinessLogicError('Invalid user ID');
         }
 
         const transactions = await transactionService.findUserTransactions(userId);
         if (!transactions.length) {
-            res.status(404).json({ message: 'No transactions found for this user' });
-            return;
+            throw new NotFoundError('Transactions for this user');
         }
 
         res.json(transactions);
     } catch (error) {
-        console.error('Error fetching user transactions:', error);
-        res.status(500).json({
-            message: 'Failed to retrieve transactions',
-            error: error instanceof Error ? error.message : 'Unknown error'
-        });
+        next(error);
     }
 };
 
-export const getTransactionById = async (req: Request, res: Response): Promise<void> => {
+export const getTransactionById = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
     try {
         const transactionId = Number(req.params.id);
         
         if (isNaN(transactionId)) {
-            res.status(400).json({ message: 'Invalid transaction ID' });
-            return;
+            throw new BusinessLogicError('Invalid transaction ID');
         }
 
         const transaction = await transactionService.findTransactionById(transactionId);
         if (!transaction) {
-            res.status(404).json({ message: 'Transaction not found' });
-            return;
+            throw new NotFoundError('Transaction');
         }
 
         res.json(transaction);
     } catch (error) {
-        console.error('Error fetching transaction:', error);
-        res.status(500).json({
-            message: 'Failed to retrieve transaction',
-            error: error instanceof Error ? error.message : 'Unknown error'
-        });
+        next(error);
     }
 }; 

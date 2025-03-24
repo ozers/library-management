@@ -1,23 +1,30 @@
 # Library Management System
 
-A robust Library Management System built with Node.js and PostgreSQL, designed to manage books and users within a library. The system supports operations such as borrowing and returning books, along with comprehensive user management.
+A robust Library Management System built with Node.js and PostgreSQL, designed to manage books, users, and borrowing transactions within a library. The system follows functional programming principles and implements SOLID design patterns.
 
 ## Features
 
-- User management (create, read, update)
-- Book management (add, remove, update)
-- Book borrowing and returning system
+- User management (create, read)
+- Book management (add, read)
+- Book borrowing and returning system with ratings
+- Transaction history tracking
+- Environment-based configuration
 - Docker containerization for easy deployment
 - RESTful API architecture
 - PostgreSQL database with Sequelize ORM
+- Comprehensive input validation
+- Type-safe development with TypeScript
 
 ## Technologies 
 
 - Node.js
+- TypeScript
 - PostgreSQL
 - Sequelize ORM
-- Docker & Docker Compose
 - Express.js
+- Docker & Docker Compose
+- express-validator
+- dotenv
 
 ## Prerequisites
 
@@ -25,25 +32,35 @@ A robust Library Management System built with Node.js and PostgreSQL, designed t
 - npm (v6 or higher)
 - Docker & Docker Compose
 - Git
-- PostgreSQL client tools (psql, createdb)
+- PostgreSQL client tools (psql)
+- Postman (for API testing)
 
 ## Installation
 
 1. **Clone the repository**:
    ```bash
-   # Using HTTPS
    git clone https://github.com/ozers/library-management.git
-   
-   # Using SSH
-   git clone git@github.com:ozers/library-management.git
-   
-   # Using GitHub CLI
-   gh repo clone ozers/library-management
+   cd library-management
    ```
 
-2. **Navigate to project directory**:
+2. **Set up environment variables**:
    ```bash
-   cd library-management
+   cp .env.example .env
+   ```
+   Edit `.env` file with your configuration:
+   ```env
+   # Database Configuration
+   DB_HOST=db
+   DB_PORT=5432
+   DB_NAME=library_db
+   DB_USER=postgres
+   DB_PASSWORD=postgres
+
+   # Node Environment
+   NODE_ENV=development
+
+   # Server Configuration
+   PORT=3000
    ```
 
 3. **Install dependencies**:
@@ -51,105 +68,176 @@ A robust Library Management System built with Node.js and PostgreSQL, designed t
    npm install
    ```
 
-4. **Build the project**:
+4. **Start the services**:
+
+   Development mode:
    ```bash
-   npm run build
+   # Build and start development containers
+   npm run docker:build:dev
+   npm run docker:up:dev
+
+   # View logs
+   npm run docker:logs:dev
+
+   # Stop containers
+   npm run docker:down:dev
    ```
 
-5. **Start the services**:
+   Production mode:
    ```bash
-   cd docker
-   docker-compose up
+   # Build and start production containers
+   npm run docker:build
+   npm run docker:up
+
+   # View logs
+   npm run docker:logs
+
+   # Stop containers
+   npm run docker:down
    ```
-
-## Database Setup
-
-You can initialize the database in two ways:
-
-### Option 1: Using the initialization script (Recommended)
-
-The project includes a shell script that automates the database initialization process:
-
-```bash
-# Make the script executable
-chmod +x database/init_db.sh
-
-# Run the initialization script
-./database/init_db.sh
-```
-
-This script will:
-1. Create the database if it doesn't exist
-2. Execute the schema creation script
-3. Run all seed files in order
-4. Provide colored output for better visibility
-
-### Option 2: Manual Setup
-
-If you prefer to set up the database manually:
-
-1. **Initialize the database schema**:
-   - Navigate to `database/schema`
-   - Run `create_initial_schema.sql` against your PostgreSQL instance
-
-2. **Seed the database**:
-   - Navigate to `database/seeds`
-   - Run `1_seed_users_and_books_tables.sql` to populate initial data
 
 ## API Documentation
 
-The API is available at `http://localhost:3000`
+The API is available at `http://localhost:3000` (or your configured `baseUrl`)
 
-### API Testing
+### API Testing with Postman
 
-You can test the API using either:
+1. **Import Collection and Environment**:
+   - Import the collection from `docs/postman_collection.json`
+   - Import environment from `docs/postman_environments.json`
 
-1. **Postman Collection**: Import the collection from `docs/postman_collection.json`
-2. **Curl Commands**: Use the curl commands provided in `docs/curl_commands.md`
+2. **Select Environment**:
+   - Choose the development environment from Postman's environment selector
+   - Development environment configuration:
+     - Base URL: `http://localhost:3000`
 
-### Endpoints
+3. **Environment Variables**:
+   The environment includes:
+   - `baseUrl`: Base URL for the API
+   - `testUserId`: Test user ID for API requests
+   - `testBookId`: Test book ID for API requests
+   - `testTransactionId`: Test transaction ID for API requests
+
+4. **Running Tests**:
+   - Collection includes basic tests for:
+     - Response status validation
+     - Response time checks
+     - Data format validation
+
+### API Endpoints
 
 #### Users
-- `GET /users` - Fetch all users
-- `GET /user/:userId` - Fetch specific user by ID
+- `GET /users` - Get all users
+- `GET /users/:id` - Get user by ID
 - `POST /users` - Create a new user
+  ```json
+  {
+    "name": "John Doe",
+    "email": "john@example.com"
+  }
+  ```
 
 #### Books
-- `GET /books` - Fetch all books
-- `GET /book/:bookId` - Fetch specific book by ID
+- `GET /books` - Get all books
+- `GET /books/:id` - Get book by ID
 - `POST /books` - Add a new book
+  ```json
+  {
+    "name": "The Great Gatsby"
+  }
+  ```
 
-#### Book Operations
-- `POST /users/{userId}/borrow/{bookId}` - Record book borrowing
-- `POST /users/{userId}/return/{bookId}` - Record book return
+#### Borrow Operations
+- `POST /borrow/:userId/borrow/:bookId` - Borrow a book
+- `POST /borrow/:userId/return/:bookId` - Return a book with rating
+  ```json
+  {
+    "score": 5  // Rating between 1 and 10
+  }
+  ```
+
+#### Transactions
+- `GET /transactions/user/:userId` - Get user's transaction history
+- `GET /transactions/:id` - Get specific transaction details
 
 ## Project Structure
 
 ```
 library-management/
-├── src/                    # Source code
-├── database/              # Database related files
-│   ├── schema/           # Database schema
-│   ├── seeds/            # Seed data
-│   └── init_db.sh        # Database initialization script
-├── docker/               # Docker configuration
-├── docs/                 # Documentation
-│   ├── postman_collection.json  # Postman collection
-│   └── curl_commands.md        # Curl commands for API testing
-├── tests/                # Test files
-└── docs/                 # Documentation
+├── src/
+│   ├── config/         # Configuration files
+│   ├── controllers/    # Request handlers
+│   ├── models/         # Database models
+│   ├── routes/         # API routes
+│   ├── services/       # Business logic
+│   ├── validators/     # Request validation
+│   ├── utils/          # Utility functions
+│   └── index.ts        # Application entry point
+├── docs/              # API documentation
+│   ├── postman_collection.json       # Postman collection
+│   └── postman_environments.json     # Development environment
+├── docker/            # Docker configuration
+│   ├── Dockerfile          # Production Dockerfile
+│   ├── Dockerfile.dev      # Development Dockerfile
+│   ├── docker-compose.yml  # Production compose file
+│   ├── docker-compose.dev.yml  # Development compose file
+│   └── postgres/      # PostgreSQL configuration
+│       └── init/      # Database initialization scripts
+├── tests/             # Test files
+└── package.json       # Project dependencies and scripts
 ```
 
 ## Development
 
-To run the application in development mode:
+### Local Development
+To run the application locally:
 ```bash
+# Start in development mode with hot-reload
 npm run dev
+
+# Start in debug mode
+npm run debug
+
+# Run tests
+npm test
+npm run test:watch  # Run tests in watch mode
 ```
 
-To run tests:
+### Docker Development
+To run the application in Docker development mode:
 ```bash
-npm test
+# Build and start containers
+npm run docker:build:dev
+npm run docker:up:dev
+
+# View logs
+npm run docker:logs:dev
+
+# Stop containers
+npm run docker:down:dev
+```
+
+## Error Handling
+
+The API uses standard HTTP status codes:
+- 200: Success
+- 201: Created
+- 400: Bad Request
+- 404: Not Found
+- 500: Internal Server Error
+
+Error responses follow this format:
+```json
+{
+  "status": "error",
+  "message": "Error description",
+  "errors": [
+    {
+      "field": "fieldName",
+      "message": "Validation error message"
+    }
+  ]
+}
 ```
 
 ## Contributing

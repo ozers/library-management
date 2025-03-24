@@ -1,34 +1,50 @@
-import express, {Request, Response} from 'express';
-import sequelize from './config/database';
+import express from 'express';
+import dotenv from 'dotenv';
+import sequelize, { testConnection } from './config/database';
+import userRoutes from './routes/userRoutes';
 import bookRoutes from './routes/bookRoutes';
-import userRoutes from "./routes/userRoutes";
-import borrowRoutes from "./routes/borrowRoutes";
-import transactionRoutes from "./routes/transactionRoutes";
-import setupAssociations from "./utils/associations";
+import borrowRoutes from './routes/borrowRoutes';
+import transactionRoutes from './routes/transactionRoutes';
+import { errorLogger, errorHandler } from './middleware/errorHandler';
+import setupAssociations from './utils/associations';
+
+dotenv.config();
 
 const app = express();
-const port = 3000;
-
-setupAssociations();
-
-sequelize.sync({force: false}).then(() => {
-    console.log('Database & associations setup completed');
-})
-    .catch((error: any) => {
-        console.error('Failed to synchronize database:', error);
-    });
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.use('/books', bookRoutes);
+// Routes
 app.use('/users', userRoutes);
+app.use('/books', bookRoutes);
 app.use('/borrow', borrowRoutes);
 app.use('/transactions', transactionRoutes);
 
-app.get('/', (req: Request, res: Response) => {
-    res.send('Welcome to Library Management API!');
-});
+// Error handling
+app.use(errorLogger);
+app.use(errorHandler);
 
-app.listen(port, () => {
-    console.log(`The server is running on http://localhost:${port}`);
-});
+// Database connection and server start
+const startServer = async () => {
+    try {
+        await testConnection();
+        
+        // Setup model associations
+        setupAssociations();
+        console.log('Model associations have been set up');
+        
+        // Sync database tables without force
+        await sequelize.sync({ force: false });
+        console.log('Database tables have been synchronized');
+        
+        app.listen(port, () => {
+            console.log(`Server is running on port ${port}`);
+        });
+    } catch (error) {
+        console.error('Failed to start server:', error);
+        process.exit(1);
+    }
+};
+
+startServer();
