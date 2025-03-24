@@ -1,15 +1,15 @@
-import {Model, DataTypes} from 'sequelize';
+import { DataTypes } from 'sequelize';
 import sequelize from '../config/database';
 
-export class Book extends Model {
-    public id!: number;
-    public name!: string;
-    public available!: boolean;
-    public averageRating?: number;
-    public borrowCount!: number;
+export interface Book {
+    id: number;
+    name: string;
+    available: boolean;
+    averageRating?: number;
+    borrowCount: number;
 }
 
-Book.init({
+export const BookModel = sequelize.define('Book', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -34,10 +34,9 @@ Book.init({
         defaultValue: 0,
         field: 'borrow_count'
     }
-
 }, {
-    sequelize,
-    modelName: 'Book',
     tableName: 'books',
     timestamps: false
 });
+
+export type BookCreationAttributes = Omit<Book, 'id' | 'available' | 'averageRating' | 'borrowCount'>;

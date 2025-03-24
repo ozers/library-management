@@ -1,17 +1,19 @@
-import {Model, DataTypes} from 'sequelize';
+import { DataTypes } from 'sequelize';
 import sequelize from '../config/database';
 
-export class Transaction extends Model {
-    public id!: number;
-    public userId!: number;
-    public bookId!: number;
-    public borrowDate!: Date;
-    public returnDate?: Date;
-    public status!: string;
-    public rating?: number;
+export type TransactionStatus = 'borrowed' | 'returned';
+
+export interface Transaction {
+    id: number;
+    userId: number;
+    bookId: number;
+    borrowDate: Date;
+    returnDate: Date | null;
+    status: TransactionStatus;
+    rating: number | null;
 }
 
-Transaction.init({
+export const TransactionModel = sequelize.define('Transaction', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -19,19 +21,24 @@ Transaction.init({
     },
     userId: {
         type: DataTypes.INTEGER,
-        references: {model: 'users', key: 'id'},
+        allowNull: false,
         field: 'user_id',
-        allowNull: false
+        references: {
+            model: 'users',
+            key: 'id'
+        }
     },
     bookId: {
         type: DataTypes.INTEGER,
-        references: {model: 'books', key: 'id'},
+        allowNull: false,
         field: 'book_id',
-        allowNull: false
+        references: {
+            model: 'books',
+            key: 'id'
+        }
     },
     borrowDate: {
         type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
         allowNull: false,
         field: 'borrow_date'
     },
@@ -41,20 +48,16 @@ Transaction.init({
         field: 'return_date'
     },
     status: {
-        type: DataTypes.STRING,
+        type: DataTypes.ENUM('borrowed', 'returned'),
         allowNull: false
     },
     rating: {
-        type: DataTypes.DECIMAL(4, 2),
-        allowNull: true,
-        validate: {
-            min: 1,
-            max: 10
-        }
+        type: DataTypes.FLOAT,
+        allowNull: true
     }
 }, {
-    sequelize,
-    modelName: 'Transaction',
     tableName: 'transactions',
     timestamps: false
 });
+
+export type TransactionCreationAttributes = Omit<Transaction, 'id'>;

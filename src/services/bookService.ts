@@ -1,25 +1,33 @@
-import {Book} from "../models/book";
-import {Transaction} from "sequelize";
+import { Book, BookModel, BookCreationAttributes } from "../models/book";
+import { Transaction } from "sequelize";
 
-export const bookService = {
-    add: async (bookData: any) => {
-        return await Book.create(bookData);
-    },
+export const createBook = async (bookData: BookCreationAttributes): Promise<Book> => {
+    const book = await BookModel.create(bookData);
+    return book.toJSON() as Book;
+};
 
-    calculateRating: (newRating: number, averageRating: number, borrowCount: number): number => {
-        if (borrowCount === 0) return newRating
+export const calculateBookRating = (
+    newRating: number,
+    averageRating: number,
+    borrowCount: number
+): number => {
+    if (borrowCount === 0) return newRating;
 
-        const totalRating = averageRating * borrowCount;
-        const newTotalRating = totalRating + newRating;
+    const totalRating = averageRating * borrowCount;
+    const newTotalRating = totalRating + newRating;
 
-        return newTotalRating / (borrowCount + 1);
-    },
+    return newTotalRating / (borrowCount + 1);
+};
 
-    findAll: async () => {
-        return await Book.findAll();
-    },
+export const findAllBooks = async (): Promise<Book[]> => {
+    const books = await BookModel.findAll();
+    return books.map(book => book.toJSON() as Book);
+};
 
-    findById: async (id: number, transaction?: Transaction) => {
-        return await Book.findByPk(id, {transaction});
-    }
+export const findBookById = async (
+    id: number,
+    transaction?: Transaction
+): Promise<Book | null> => {
+    const book = await BookModel.findByPk(id, { transaction });
+    return book ? book.toJSON() as Book : null;
 };

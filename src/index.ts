@@ -2,6 +2,8 @@ import express, {Request, Response} from 'express';
 import sequelize from './config/database';
 import bookRoutes from './routes/bookRoutes';
 import userRoutes from "./routes/userRoutes";
+import borrowRoutes from "./routes/borrowRoutes";
+import transactionRoutes from "./routes/transactionRoutes";
 import setupAssociations from "./utils/associations";
 
 const app = express();
@@ -20,6 +22,8 @@ app.use(express.json());
 
 app.use('/books', bookRoutes);
 app.use('/users', userRoutes);
+app.use('/borrow', borrowRoutes);
+app.use('/transactions', transactionRoutes);
 
 app.get('/', (req: Request, res: Response) => {
     res.send('Welcome to Library Management API!');

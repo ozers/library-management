@@ -1,11 +1,27 @@
 import express from 'express';
-import {bookController} from '../controllers/bookController';
-import {bookValidationRules, validateBook} from "../validators/bookValidators";
+import * as bookController from '../controllers/bookController';
+import {
+    createBookValidationRules,
+    getBookValidationRules,
+    validateBookRequest
+} from "../validators/bookValidators";
 
 const router = express.Router();
 
 router.get('/', bookController.getAllBooks);
-router.post('/', bookValidationRules(), validateBook, bookController.addBook);
-router.get('/:id', bookController.getBookById);
+
+router.get(
+    '/:id',
+    getBookValidationRules(),
+    validateBookRequest,
+    bookController.getBookById
+);
+
+router.post(
+    '/',
+    createBookValidationRules(),
+    validateBookRequest,
+    bookController.createBook
+);
 
 export default router;

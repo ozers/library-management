@@ -1,16 +1,16 @@
-import {User} from "../models/user";
+import { User, UserModel, UserCreationAttributes } from "../models/user";
 
-export const userService = {
-    findAll: async () => {
-        return await User.findAll();
-    },
+export const findAllUsers = async (): Promise<User[]> => {
+    const users = await UserModel.findAll();
+    return users.map(user => user.toJSON() as User);
+};
 
-    findById: async (id: number) => {
-        return await User.findByPk(id);
-    },
+export const findUserById = async (id: number): Promise<User | null> => {
+    const user = await UserModel.findByPk(id);
+    return user ? user.toJSON() as User : null;
+};
 
-    add: async (userData: any) => {
-        return await User.create(userData);
-    }
-
-}
+export const createUser = async (userData: UserCreationAttributes): Promise<User> => {
+    const user = await UserModel.create(userData);
+    return user.toJSON() as User;
+};

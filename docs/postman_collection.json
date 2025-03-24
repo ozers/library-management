@@ -11,7 +11,7 @@
             "name": "Get All Users",
             "request": {
               "method": "GET",
-              "url": "http://localhost:3000/users",
+              "url": "{{baseUrl}}/users",
               "description": "Retrieve all users from the system"
             }
           },
@@ -19,7 +19,7 @@
             "name": "Get User by ID",
             "request": {
               "method": "GET",
-              "url": "http://localhost:3000/users/{{userId}}",
+              "url": "{{baseUrl}}/users/{{userId}}",
               "description": "Retrieve a specific user by ID"
             }
           },
@@ -27,7 +27,7 @@
             "name": "Create New User",
             "request": {
               "method": "POST",
-              "url": "http://localhost:3000/users",
+              "url": "{{baseUrl}}/users",
               "body": {
                 "mode": "raw",
                 "raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\"\n}",
@@ -49,7 +49,7 @@
             "name": "Get All Books",
             "request": {
               "method": "GET",
-              "url": "http://localhost:3000/books",
+              "url": "{{baseUrl}}/books",
               "description": "Retrieve all books from the system"
             }
           },
@@ -57,7 +57,7 @@
             "name": "Get Book by ID",
             "request": {
               "method": "GET",
-              "url": "http://localhost:3000/books/{{bookId}}",
+              "url": "{{baseUrl}}/books/{{bookId}}",
               "description": "Retrieve a specific book by ID"
             }
           },
@@ -65,10 +65,10 @@
             "name": "Add New Book",
             "request": {
               "method": "POST",
-              "url": "http://localhost:3000/books",
+              "url": "{{baseUrl}}/books",
               "body": {
                 "mode": "raw",
-                "raw": "{\n    \"title\": \"The Great Gatsby\",\n    \"author\": \"F. Scott Fitzgerald\",\n    \"isbn\": \"978-0743273565\",\n    \"available\": true\n}",
+                "raw": "{\n    \"name\": \"The Great Gatsby\"\n}",
                 "options": {
                   "raw": {
                     "language": "json"
@@ -87,7 +87,7 @@
             "name": "Borrow Book",
             "request": {
               "method": "POST",
-              "url": "http://localhost:3000/users/{{userId}}/borrow/{{bookId}}",
+              "url": "{{baseUrl}}/borrow/{{userId}}/borrow/{{bookId}}",
               "description": "Borrow a book for a user"
             }
           },
@@ -95,10 +95,10 @@
             "name": "Return Book",
             "request": {
               "method": "POST",
-              "url": "http://localhost:3000/users/{{userId}}/return/{{bookId}}",
+              "url": "{{baseUrl}}/borrow/{{userId}}/return/{{bookId}}",
               "body": {
                 "mode": "raw",
-                "raw": "{\n    \"rating\": 5\n}",
+                "raw": "{\n    \"score\": 5\n}",
                 "options": {
                   "raw": {
                     "language": "json"
@@ -109,18 +109,53 @@
             }
           }
         ]
+      },
+      {
+        "name": "Transactions",
+        "item": [
+          {
+            "name": "Get User Transactions",
+            "request": {
+              "method": "GET",
+              "url": "{{baseUrl}}/transactions/user/{{userId}}",
+              "description": "Get all transactions for a specific user"
+            }
+          },
+          {
+            "name": "Get Transaction by ID",
+            "request": {
+              "method": "GET",
+              "url": "{{baseUrl}}/transactions/{{transactionId}}",
+              "description": "Get a specific transaction by ID"
+            }
+          }
+        ]
       }
     ],
     "variable": [
       {
+        "key": "baseUrl",
+        "value": "http://localhost:3000",
+        "type": "string",
+        "description": "Base URL for the API"
+      },
+      {
         "key": "userId",
         "value": "1",
-        "type": "string"
+        "type": "string",
+        "description": "User ID for testing"
       },
       {
         "key": "bookId",
         "value": "1",
-        "type": "string"
+        "type": "string",
+        "description": "Book ID for testing"
+      },
+      {
+        "key": "transactionId",
+        "value": "1",
+        "type": "string",
+        "description": "Transaction ID for testing"
       }
     ]
-  }
+}

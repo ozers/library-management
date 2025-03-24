@@ -1,50 +1,52 @@
-import {Request, Response} from 'express';
-import {bookService} from '../services/bookService';
-import {Book} from "../models/book";
+import { Request, Response } from 'express';
+import * as bookService from '../services/bookService';
+import { Book } from "../models/book";
 
-export const bookController = {
-    getAllBooks: async (req: Request, res: Response) => {
-        debugger // look for debug!
-        try {
-            const books = await bookService.findAll();
-            if (!books) {
-                return res.status(404).json({message: 'No books found.'});
-            }
-            res.json(books);
-        } catch (error: any) {
-            console.error('Error fetching books:', error);
-            res.status(500).json({message: 'Failed to retrieve books', error: error.message});
+export const getAllBooks = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const books = await bookService.findAllBooks();
+        if (!books.length) {
+            res.status(404).json({ message: 'No books found.' });
+            return;
         }
-    },
+        res.json(books);
+    } catch (error) {
+        console.error('Error fetching books:', error);
+        res.status(500).json({ message: 'Failed to retrieve books' });
+    }
+};
 
-    getBookById: async (req: Request, res: Response) => {
-        try {
-            const book: Book | null = await bookService.findById(Number(req.params.id));
-            if (!book) {
-                return res.status(404).json({message: 'No books found for this ID'});
-            }
-
-            res.json(book);
-        } catch (error: any) {
-            console.error('Error fetching book:', error);
-            res.status(500).json({message: 'Failed to retrieve book', error: error.message});
-
+export const getBookById = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const bookId = Number(req.params.id);
+        if (isNaN(bookId)) {
+            res.status(400).json({ message: 'Invalid book ID' });
+            return;
         }
-    },
 
-    addBook: async (req: Request, res: Response) => {
-        console.log(req.body)
-        try {
-            const {name} = req.body;
-            const newBook: Book = await bookService.add({name})
-
-            res.status(201).json(newBook);
-        } catch (error: any) {
-            if (error.name === 'SequelizeUniqueConstraintError') {
-                return res.status(400).json({message: 'Book name must be unique.'});
-            }
-
-            return res.status(500).json({message: 'Failed to create book.', error: error.message});
+        const book = await bookService.findBookById(bookId);
+        if (!book) {
+            res.status(404).json({ message: 'Book not found' });
+            return;
         }
+        res.json(book);
+    } catch (error) {
+        console.error('Error fetching book:', error);
+        res.status(500).json({ message: 'Failed to retrieve book' });
+    }
+};
+
+export const createBook = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { name } = req.body;
+        const newBook = await bookService.createBook({ name });
+        res.status(201).json(newBook);
+    } catch (error: any) {
+        if (error.name === 'SequelizeUniqueConstraintError') {
+            res.status(400).json({ message: 'Book name must be unique.' });
+            return;
+        }
+        console.error('Error creating book:', error);
+        res.status(500).json({ message: 'Failed to create book' });
     }
 };
