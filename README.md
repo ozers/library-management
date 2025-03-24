@@ -383,19 +383,23 @@ npm run docker:up
 
 <div align="left">
 
-- **Books**
-  - `GET /api/books` - List all books
-  - `POST /api/books` - Create new book
-  - `GET /api/books/:id` - Get book details
-  - `PUT /api/books/:id` - Update book
-  - `DELETE /api/books/:id` - Delete book
+- **Books** (`/api/books`)
+  - `GET /` - List all books
+  - `GET /:id` - Get book details
+  - `POST /` - Create new book
 
-- **Authors**
-  - `GET /api/authors` - List all authors
-  - `POST /api/authors` - Create new author
-  - `GET /api/authors/:id` - Get author details
-  - `PUT /api/authors/:id` - Update author
-  - `DELETE /api/authors/:id` - Delete author
+- **Users** (`/api/users`)
+  - `GET /` - List all users
+  - `GET /:id` - Get user details
+  - `POST /` - Create new user
+
+- **Borrowing & Returns** (`/api/borrow`)
+  - `POST /:userId/borrow/:bookId` - Borrow a book
+  - `POST /:userId/return/:bookId` - Return a book with optional rating
+
+- **Transactions** (`/api/transactions`)
+  - `GET /user/:userId` - Get user's transactions
+  - `GET /:id` - Get transaction details
 
 </div>
 
@@ -417,8 +421,13 @@ npm run docker:up
 
 - **Filtering**
   - `search`: Search term
-  - `sort`: Sort field
-  - `order`: Sort order (asc/desc)
+  - `sort`: Sort field (e.g., 'name', 'createdAt', 'returnDate')
+  - `order`: Sort order ('asc' or 'desc')
+  - `status`: Filter by status ('active', 'returned', 'overdue')
+  - `available`: Filter by availability (for books)
+  - `rating`: Filter by rating (1-5)
+  - `fromDate`: Filter from date
+  - `toDate`: Filter to date
 
 </div>
 
