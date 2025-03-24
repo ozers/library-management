@@ -14,6 +14,7 @@ A robust Library Management System built with Node.js and PostgreSQL, designed t
 - PostgreSQL database with Sequelize ORM
 - Comprehensive input validation
 - Type-safe development with TypeScript
+- Comprehensive unit and integration tests
 
 ## Technologies 
 
@@ -25,6 +26,7 @@ A robust Library Management System built with Node.js and PostgreSQL, designed t
 - Docker & Docker Compose
 - express-validator
 - dotenv
+- Jest (Testing)
 
 ## Prerequisites
 
@@ -95,6 +97,25 @@ A robust Library Management System built with Node.js and PostgreSQL, designed t
    # Stop containers
    npm run docker:down
    ```
+
+## Testing
+
+The project includes comprehensive unit and integration tests:
+
+```bash
+# Run all tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests with coverage
+npm run test:coverage
+```
+
+Test files are organized as follows:
+- `__tests__/validators/`: Unit tests for request validators
+- `__tests__/services/`: Unit tests for business logic services
 
 ## API Documentation
 
@@ -173,6 +194,9 @@ library-management/
 │   ├── validators/     # Request validation
 │   ├── utils/          # Utility functions
 │   └── index.ts        # Application entry point
+├── __tests__/          # Test files
+│   ├── validators/     # Unit tests for validators
+│   └── services/       # Unit tests for services
 ├── docs/              # API documentation
 │   ├── postman_collection.json       # Postman collection
 │   └── postman_environments.json     # Development environment
@@ -183,7 +207,6 @@ library-management/
 │   ├── docker-compose.dev.yml  # Development compose file
 │   └── postgres/      # PostgreSQL configuration
 │       └── init/      # Database initialization scripts
-├── tests/             # Test files
 └── package.json       # Project dependencies and scripts
 ```
 
@@ -201,6 +224,7 @@ npm run debug
 # Run tests
 npm test
 npm run test:watch  # Run tests in watch mode
+npm run test:coverage  # Run tests with coverage report
 ```
 
 ### Docker Development

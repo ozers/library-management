@@ -25,9 +25,9 @@
             "request": {
               "method": "GET",
               "url": {
-                "raw": "{{baseUrl}}/users/{{testUserId}}",
+                "raw": "{{baseUrl}}/users/{{userId}}",
                 "host": ["{{baseUrl}}"],
-                "path": ["users", "{{testUserId}}"]
+                "path": ["users", "{{userId}}"]
               }
             }
           },
@@ -73,9 +73,9 @@
             "request": {
               "method": "GET",
               "url": {
-                "raw": "{{baseUrl}}/books/{{testBookId}}",
+                "raw": "{{baseUrl}}/books/{{bookId}}",
                 "host": ["{{baseUrl}}"],
-                "path": ["books", "{{testBookId}}"]
+                "path": ["books", "{{bookId}}"]
               }
             }
           },
@@ -110,9 +110,9 @@
             "request": {
               "method": "POST",
               "url": {
-                "raw": "{{baseUrl}}/borrow/{{testUserId}}/borrow/{{testBookId}}",
+                "raw": "{{baseUrl}}/borrow/{{userId}}/borrow/{{bookId}}",
                 "host": ["{{baseUrl}}"],
-                "path": ["borrow", "{{testUserId}}", "borrow", "{{testBookId}}"]
+                "path": ["borrow", "{{userId}}", "borrow", "{{bookId}}"]
               }
             }
           },
@@ -127,9 +127,9 @@
                 }
               ],
               "url": {
-                "raw": "{{baseUrl}}/borrow/{{testUserId}}/return/{{testBookId}}",
+                "raw": "{{baseUrl}}/borrow/{{userId}}/return/{{bookId}}",
                 "host": ["{{baseUrl}}"],
-                "path": ["borrow", "{{testUserId}}", "return", "{{testBookId}}"]
+                "path": ["borrow", "{{userId}}", "return", "{{bookId}}"]
               },
               "body": {
                 "mode": "raw",
@@ -147,9 +147,9 @@
             "request": {
               "method": "GET",
               "url": {
-                "raw": "{{baseUrl}}/transactions/user/{{testUserId}}",
+                "raw": "{{baseUrl}}/transactions/user/{{userId}}",
                 "host": ["{{baseUrl}}"],
-                "path": ["transactions", "user", "{{testUserId}}"]
+                "path": ["transactions", "user", "{{userId}}"]
               }
             }
           },
@@ -158,9 +158,9 @@
             "request": {
               "method": "GET",
               "url": {
-                "raw": "{{baseUrl}}/transactions/{{testTransactionId}}",
+                "raw": "{{baseUrl}}/transactions/{{transactionId}}",
                 "host": ["{{baseUrl}}"],
-                "path": ["transactions", "{{testTransactionId}}"]
+                "path": ["transactions", "{{transactionId}}"]
               }
             }
           }
@@ -175,19 +175,19 @@
         "description": "Base URL for the API"
       },
       {
-        "key": "testUserId",
+        "key": "userId",
         "value": "1",
         "type": "string",
         "description": "User ID for testing"
       },
       {
-        "key": "testBookId",
+        "key": "bookId",
         "value": "1",
         "type": "string",
         "description": "Book ID for testing"
       },
       {
-        "key": "testTransactionId",
+        "key": "transactionId",
         "value": "1",
         "type": "string",
         "description": "Transaction ID for testing"

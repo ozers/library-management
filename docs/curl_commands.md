@@ -73,9 +73,27 @@ curl -X GET http://localhost:3000/transactions/user/1
 curl -X GET http://localhost:3000/transactions/1
 ```
 
+## Testing
+
+### Run All Tests
+```bash
+npm test
+```
+
+### Run Tests in Watch Mode
+```bash
+npm run test:watch
+```
+
+### Run Tests with Coverage
+```bash
+npm run test:coverage
+```
+
 ## Notes
 
 - Replace IDs (1) in the URLs with actual IDs from your database
 - All POST requests require the `Content-Type: application/json` header
 - The server must be running on `localhost:3000` for these commands to work
-- Make sure to properly escape any special characters in the JSON payloads when using these commands in a shell 
+- Make sure to properly escape any special characters in the JSON payloads when using these commands in a shell
+- For testing, make sure to run `npm install` first to install all dependencies 
