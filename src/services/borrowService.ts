@@ -1,6 +1,7 @@
 import { Transaction, TransactionModel, TransactionCreationAttributes } from "../models/transaction";
-import { Book, BookModel } from "../models/book";
+import { BookModel } from "../models/book";
 import sequelize from '../config/database';
+import { Transaction as SequelizeTransaction } from 'sequelize';
 import * as bookService from "./bookService";
 import * as validator from "../validators/borrowValidator";
 
@@ -12,7 +13,7 @@ export interface BorrowResult {
 export const findTransactionByBookAndUser = async (
     bookId: number,
     userId: number,
-    transaction?: any
+    transaction?: SequelizeTransaction
 ): Promise<Transaction | null> => {
     validator.validateId(bookId, 'Book');
     validator.validateId(userId, 'User');
@@ -120,13 +121,9 @@ export const returnBook = async (
             await BookModel.update(
                 {
                     averageRating: newRating,
-                    borrowCount: book.borrowCount + 1,
-                    available: true
+                    borrowCount: book.borrowCount + 1
                 },
-                {
-                    where: { id: bookId },
-                    transaction: t
-                }
+                { where: { id: bookId }, transaction: t }
             );
 
             const updatedTransaction = await TransactionModel.findByPk(transaction.id, { transaction: t });

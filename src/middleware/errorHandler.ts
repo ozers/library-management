@@ -1,6 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
 import { AppError } from '../utils/errors';
 
+interface SequelizeError {
+    path: string;
+    message: string;
+}
+
+interface SequelizeUniqueConstraintError extends Error {
+    name: 'SequelizeUniqueConstraintError';
+    errors?: SequelizeError[];
+}
+
 export const errorLogger = (
     error: Error,
     req: Request,
@@ -22,25 +32,25 @@ export const errorLogger = (
 };
 
 export const errorHandler = (
-    error: Error,
+    err: Error,
     req: Request,
     res: Response,
-    next: NextFunction
-) => {
-    if (error instanceof AppError) {
-        return res.status(error.statusCode).json({
+    _next: NextFunction
+): Response => {
+    if (err instanceof AppError) {
+        return res.status(err.statusCode).json({
             status: 'error',
-            message: error.message,
-            errors: error.errors || undefined
+            message: err.message,
+            errors: err.errors || undefined
         });
     }
 
     // Sequelize specific errors
-    if (error.name === 'SequelizeUniqueConstraintError') {
+    if (err.name === 'SequelizeUniqueConstraintError') {
         return res.status(409).json({
             status: 'error',
             message: 'Resource already exists',
-            errors: (error as any).errors?.map((e: any) => ({
+            errors: ((err as SequelizeUniqueConstraintError).errors || []).map((e) => ({
                 field: e.path,
                 message: e.message
             }))
@@ -50,6 +60,6 @@ export const errorHandler = (
     // Default error response
     return res.status(500).json({
         status: 'error',
-        message: error.message
+        message: err.message
     });
 }; 

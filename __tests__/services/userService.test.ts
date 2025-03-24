@@ -1,4 +1,4 @@
-import { User, UserModel, UserCreationAttributes } from '../../src/models/user';
+import { UserModel, UserCreationAttributes } from '../../src/models/user';
 import { findAllUsers, findUserById, createUser } from '../../src/services/userService';
 
 // Mock UserModel

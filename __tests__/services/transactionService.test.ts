@@ -1,7 +1,5 @@
 import { Transaction as SequelizeTransaction } from 'sequelize';
 import { Transaction, TransactionModel } from '../../src/models/transaction';
-import { Book, BookModel } from '../../src/models/book';
-import { User, UserModel } from '../../src/models/user';
 import * as transactionService from '../../src/services/transactionService';
 import * as transactionValidator from '../../src/validators/transactionValidator';
 

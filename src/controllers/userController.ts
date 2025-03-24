@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-import {User} from '../models/user';
 import * as userService from '../services/userService';
 import { NotFoundError, BusinessLogicError } from '../utils/errors';
 

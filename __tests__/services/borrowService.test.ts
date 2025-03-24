@@ -1,5 +1,5 @@
-import { Transaction, TransactionModel, TransactionCreationAttributes } from '../../src/models/transaction';
-import { Book, BookModel } from '../../src/models/book';
+import { TransactionModel } from '../../src/models/transaction';
+import { BookModel } from '../../src/models/book';
 import * as bookService from '../../src/services/bookService';
 import * as borrowService from '../../src/services/borrowService';
 import sequelize from '../../src/config/database';
@@ -186,15 +186,15 @@ describe('BorrowService', () => {
     });
 
     it('should handle invalid user ID type', async () => {
-      // @ts-ignore - Testing invalid type
+      // @ts-expect-error Testing invalid type
       await expect(borrowService.borrowBook('invalid', 1))
-        .rejects.toThrow('Failed to borrow book:');
+        .rejects.toThrow('Invalid user ID');
     });
 
     it('should handle invalid book ID type', async () => {
-      // @ts-ignore - Testing invalid type
+      // @ts-expect-error Testing invalid type
       await expect(borrowService.borrowBook(1, 'invalid'))
-        .rejects.toThrow('Failed to borrow book:');
+        .rejects.toThrow('Invalid book ID');
     });
 
     it('should handle negative user ID', async () => {
@@ -386,19 +386,19 @@ describe('BorrowService', () => {
     });
 
     it('should handle invalid user ID type', async () => {
-      // @ts-ignore - Testing invalid type
+      // @ts-expect-error Testing invalid type
       await expect(borrowService.returnBook('invalid', 1, 5))
         .rejects.toThrow('Failed to return book:');
     });
 
     it('should handle invalid book ID type', async () => {
-      // @ts-ignore - Testing invalid type
+      // @ts-expect-error Testing invalid type
       await expect(borrowService.returnBook(1, 'invalid', 5))
         .rejects.toThrow('Failed to return book:');
     });
 
     it('should handle invalid rating type', async () => {
-      // @ts-ignore - Testing invalid type
+      // @ts-expect-error Testing invalid type
       await expect(borrowService.returnBook(1, 1, 'invalid'))
         .rejects.toThrow('Failed to return book:');
     });

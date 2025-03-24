@@ -1,4 +1,4 @@
-import { Book, BookModel, BookCreationAttributes } from '../../src/models/book';
+import { BookModel, BookCreationAttributes } from '../../src/models/book';
 import { createBook, calculateBookRating, findAllBooks, findBookById } from '../../src/services/bookService';
 import { Transaction } from 'sequelize';
 
