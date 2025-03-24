@@ -34,6 +34,12 @@ export const borrowBook = async (
     bookId: number
 ): Promise<BorrowResult> => {
     try {
+        if (typeof userId !== 'number') {
+            throw new Error('Invalid user ID');
+        }
+        if (typeof bookId !== 'number') {
+            throw new Error('Invalid book ID');
+        }
         validator.validateId(userId, 'User');
         validator.validateId(bookId, 'Book');
 
@@ -80,6 +86,12 @@ export const returnBook = async (
     score: number
 ): Promise<BorrowResult> => {
     try {
+        if (typeof userId !== 'number') {
+            throw new Error('Invalid user ID');
+        }
+        if (typeof bookId !== 'number') {
+            throw new Error('Invalid book ID');
+        }
         validator.validateId(userId, 'User');
         validator.validateId(bookId, 'Book');
         validator.validateRating(score);
@@ -120,6 +132,7 @@ export const returnBook = async (
 
             await BookModel.update(
                 {
+                    available: true,
                     averageRating: newRating,
                     borrowCount: book.borrowCount + 1
                 },

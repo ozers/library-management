@@ -1,11 +1,11 @@
-import { TransactionModel } from '../../src/models/transaction';
-import { BookModel } from '../../src/models/book';
-import * as bookService from '../../src/services/bookService';
-import * as borrowService from '../../src/services/borrowService';
-import sequelize from '../../src/config/database';
+import { TransactionModel } from '../../models/transaction';
+import { BookModel } from '../../models/book';
+import * as bookService from '../../services/bookService';
+import * as borrowService from '../../services/borrowService';
+import sequelize from '../../config/database';
 
 // Mock dependencies
-jest.mock('../../src/models/transaction', () => ({
+jest.mock('../../models/transaction', () => ({
   TransactionModel: {
     findOne: jest.fn(),
     create: jest.fn(),
@@ -14,18 +14,18 @@ jest.mock('../../src/models/transaction', () => ({
   },
 }));
 
-jest.mock('../../src/models/book', () => ({
+jest.mock('../../models/book', () => ({
   BookModel: {
     update: jest.fn(),
   },
 }));
 
-jest.mock('../../src/services/bookService', () => ({
+jest.mock('../../services/bookService', () => ({
   findBookById: jest.fn(),
   calculateBookRating: jest.fn(),
 }));
 
-jest.mock('../../src/config/database', () => ({
+jest.mock('../../config/database', () => ({
   __esModule: true,
   default: {
     transaction: jest.fn(),

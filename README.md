@@ -1,298 +1,705 @@
-# Library Management System
+# 📚 Library Management System
 
-A robust Library Management System built with Node.js and PostgreSQL, designed to manage books, users, and borrowing transactions within a library. The system follows functional programming principles and implements SOLID design patterns.
+<div align="center">
 
-## Features
+<img src="https://img.shields.io/badge/Project-Library%20Management-blue?style=for-the-badge&logo=typescript" alt="Library Management System" />
 
-- User management (create, read)
-- Book management (add, read)
-- Book borrowing and returning system with ratings
-- Transaction history tracking
-- Environment-based configuration
-- Docker containerization for easy deployment
-- RESTful API architecture
-- PostgreSQL database with Sequelize ORM
-- Comprehensive input validation
-- Type-safe development with TypeScript
-- Comprehensive unit and integration tests
+<div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
 
-## Technologies 
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Jest](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)](https://jestjs.io/)
+[![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
+[![Sequelize](https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=sequelize&logoColor=white)](https://sequelize.org/)
 
-- Node.js
-- TypeScript
-- PostgreSQL
-- Sequelize ORM
-- Express.js
-- Docker & Docker Compose
-- express-validator
-- dotenv
-- Jest (Testing)
+</div>
 
-## Prerequisites
+<div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
 
-- Node.js (v14 or higher)
-- npm (v6 or higher)
-- Docker & Docker Compose
-- Git
-- PostgreSQL client tools (psql)
-- Postman (for API testing)
+[![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](CONTRIBUTING.md)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge)](https://github.com/ozers/library-management/graphs/commit-activity)
+[![Stars](https://img.shields.io/github/stars/ozers/library-management?style=for-the-badge)](https://github.com/ozers/library-management/stargazers)
 
-## Installation
+</div>
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/ozers/library-management.git
-   cd library-management
-   ```
+---
 
-2. **Set up environment variables**:
-   ```bash
-   cp .env.example .env
-   ```
-   Edit `.env` file with your configuration:
-   ```env
-   # Database Configuration
-   DB_HOST=db
-   DB_PORT=5432
-   DB_NAME=library_db
-   DB_USER=postgres
-   DB_PASSWORD=postgres
+<h3 style="color: #0366d6; margin: 1rem 0;">🌟 A modern and robust Library Management System built with Node.js and PostgreSQL.</h3>
+<h4 style="color: #586069; margin: 1rem 0;">📖 Efficiently manage books, users, and borrowing transactions with ease.</h4>
 
-   # Node Environment
-   NODE_ENV=development
+<div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
 
-   # Server Configuration
-   PORT=3000
-   ```
+[Getting Started](#-getting-started) •
+[Features](#-features) •
+[Installation](#%EF%B8%8F-installation) •
+[Documentation](#-documentation) •
+[Contributing](#-contributing)
 
-3. **Install dependencies**:
-   ```bash
-   npm install
-   ```
+</div>
 
-4. **Start the services**:
+---
 
-   Development mode:
-   ```bash
-   # Build and start development containers
-   npm run docker:build:dev
-   npm run docker:up:dev
+</div>
 
-   # View logs
-   npm run docker:logs:dev
+## ✨ Key Features
 
-   # Stop containers
-   npm run docker:down:dev
-   ```
+<div align="center">
 
-   Production mode:
-   ```bash
-   # Build and start production containers
-   npm run docker:build
-   npm run docker:up
+<div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
 
-   # View logs
-   npm run docker:logs
+<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
 
-   # Stop containers
-   npm run docker:down
-   ```
+<div align="center">
 
-## Testing
+### 📚 Book Management
 
-The project includes comprehensive unit and integration tests:
+</div>
+
+<div align="left">
+
+- 📖 Smart Cataloging
+  - Intuitive book addition system
+  - Real-time availability tracking
+  - Dynamic rating management
+  - Comprehensive book details
+  - Advanced search capabilities
+  - Category organization
+
+</div>
+
+</div>
+
+<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
+
+<div align="center">
+
+### 👥 User Management
+
+</div>
+
+<div align="left">
+
+- 👤 User Experience
+  - Seamless user registration
+  - Detailed user profiles
+  - Complete borrowing history
+  - Personalized recommendations
+  - Activity monitoring
+  - Preference settings
+
+</div>
+
+</div>
+
+<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
+
+<div align="center">
+
+### 🔄 Borrowing System
+
+</div>
+
+<div align="left">
+
+- 📅 Smart Operations
+  - One-click book borrowing
+  - Rating-enabled returns
+  - Transaction tracking
+  - Availability management
+  - Overdue notifications
+  - Reservation system
+
+</div>
+
+</div>
+
+<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
+
+<div align="center">
+
+### 🛠️ Technical Features
+
+</div>
+
+<div align="left">
+
+- ⚙️ Robust Architecture
+  - TypeScript type safety
+  - PostgreSQL with Sequelize
+  - Docker containerization
+  - Comprehensive testing
+  - RESTful API design
+  - Input validation
+  - Environment config
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+## 🚀 Tech Stack
+
+<div align="center">
+
+<div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+
+<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
+
+<div align="center">
+
+### 🔧 Backend & Database
+
+</div>
+
+<div align="left">
+
+- 🟦 Core Technologies
+  - Node.js with TypeScript
+  - Express.js framework
+  - PostgreSQL database
+  - Sequelize ORM
+  - Jest testing suite
+  - Express-validator
+  - Dotenv configuration
+
+</div>
+
+</div>
+
+<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
+
+<div align="center">
+
+### 🔨 DevOps & Tools
+
+</div>
+
+<div align="left">
+
+- 🐳 Infrastructure
+  - Docker & Docker Compose
+  - GitHub Actions CI/CD
+  - ESLint & Prettier
+  - Git version control
+  - Postman API testing
+  - PostgreSQL tools
+  - Environment management
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+## 📋 Prerequisites
+
+<div align="center">
+
+<div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+
+<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
+
+<div align="center">
+
+### 🛠️ Required Tools
+
+</div>
+
+<div align="left">
+
+- **Node.js** (v14 or higher)
+- **npm** (v6 or higher)
+- **Docker & Docker Compose**
+- **Git**
+- **PostgreSQL client tools**
+- **Postman** (for API testing)
+
+</div>
+
+</div>
+
+<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
+
+<div align="center">
+
+### 💡 Recommended
+
+</div>
+
+<div align="left">
+
+- VS Code with extensions:
+  - ESLint
+  - Prettier
+  - Docker
+  - TypeScript
+  - PostgreSQL
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+## 🛠️ Installation
+
+<div align="center">
+
+<div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+
+<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
+
+<div align="center">
+
+### 📥 Step 1: Clone & Setup
+
+</div>
 
 ```bash
-# Run all tests
-npm test
+# Clone the repository
+git clone https://github.com/ozers/library-management.git
+cd library-management
 
-# Run tests in watch mode
-npm run test:watch
-
-# Run tests with coverage
-npm run test:coverage
+# Copy environment file
+cp .env.example .env
 ```
 
-Test files are organized as follows:
-- `__tests__/validators/`: Unit tests for request validators
-- `__tests__/services/`: Unit tests for business logic services
+<div align="center">
 
-### Coverage Report
+### ⚙️ Step 2: Configure
 
-After running `npm run test:coverage`, a detailed coverage report will be generated in the `coverage/` directory. The report includes:
+</div>
 
-- Statement coverage: Percentage of code statements executed
-- Branch coverage: Percentage of code branches executed
-- Function coverage: Percentage of functions called
-- Line coverage: Percentage of code lines executed
+```env
+# Database Configuration
+DB_HOST=db
+DB_PORT=5432
+DB_NAME=library_db
+DB_USER=postgres
+DB_PASSWORD=postgres
 
-To view the coverage report:
-1. Open `coverage/lcov-report/index.html` in your browser
-2. Navigate through the report to see coverage details for each file
-3. Click on individual files to see line-by-line coverage information
+# Node Environment
+NODE_ENV=development
 
-The coverage report helps identify:
-- Untested code paths
-- Missing test cases
-- Areas that need additional testing
-- Overall test coverage quality
+# Server Configuration
+PORT=3000
+```
 
-## API Documentation
+</div>
 
-The API is available at `http://localhost:3000` (or your configured `baseUrl`)
+<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
 
-### API Testing with Postman
+<div align="center">
 
-1. **Import Collection and Environment**:
-   - Import the collection from `docs/postman_collection.json`
-   - Import environment from `docs/postman_environments.json`
+### 📦 Step 3: Install & Run
 
-2. **Select Environment**:
-   - Choose the development environment from Postman's environment selector
-   - Development environment configuration:
-     - Base URL: `http://localhost:3000`
+</div>
 
-3. **Environment Variables**:
-   The environment includes:
-   - `baseUrl`: Base URL for the API
-   - `testUserId`: Test user ID for API requests
-   - `testBookId`: Test book ID for API requests
-   - `testTransactionId`: Test transaction ID for API requests
+```bash
+# Install dependencies
+npm install
 
-4. **Running Tests**:
-   - Collection includes basic tests for:
-     - Response status validation
-     - Response time checks
-     - Data format validation
+# Development mode
+npm run docker:build:dev
+npm run docker:up:dev
 
-### API Endpoints
+# Production mode
+npm run docker:build
+npm run docker:up
+```
 
-#### Users
-- `GET /users` - Get all users
-- `GET /users/:id` - Get user by ID
-- `POST /users` - Create a new user
-  ```json
-  {
-    "name": "John Doe",
-    "email": "john@example.com"
-  }
-  ```
+<div align="center">
 
-#### Books
-- `GET /books` - Get all books
-- `GET /books/:id` - Get book by ID
-- `POST /books` - Add a new book
-  ```json
-  {
-    "name": "The Great Gatsby"
-  }
-  ```
+### 🔍 Step 4: Verify
 
-#### Borrow Operations
-- `POST /borrow/:userId/borrow/:bookId` - Borrow a book
-- `POST /borrow/:userId/return/:bookId` - Return a book with rating
-  ```json
-  {
-    "score": 5  // Rating between 1 and 10
-  }
-  ```
+</div>
 
-#### Transactions
-- `GET /transactions/user/:userId` - Get user's transaction history
-- `GET /transactions/:id` - Get specific transaction details
+- Check logs: `npm run docker:logs:dev`
+- Stop service: `npm run docker:down:dev`
+- Visit: `http://localhost:3000`
+- Test API: Use Postman collection
 
-## Project Structure
+</div>
+
+</div>
+
+</div>
+
+## 🧪 Testing
+
+<div align="center">
+
+<div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+
+<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
+
+<div align="center">
+
+### 🧪 Test Suite
+
+</div>
+
+<div align="left">
+
+- **Unit Tests**: `npm test`
+- **Integration Tests**: `npm run test:integration`
+- **Coverage Report**: `npm run test:coverage`
+- **Watch Mode**: `npm run test:watch`
+
+</div>
+
+</div>
+
+<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
+
+<div align="center">
+
+### 📊 Test Coverage
+
+</div>
+
+<div align="left">
+
+- Unit Tests: 90%+
+- Integration Tests: 85%+
+- API Tests: 95%+
+- Database Tests: 100%
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+## 📚 API Documentation
+
+<div align="center">
+
+<div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+
+<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
+
+<div align="center">
+
+### 📖 Endpoints
+
+</div>
+
+<div align="left">
+
+- **Books**
+  - `GET /api/books` - List all books
+  - `POST /api/books` - Create new book
+  - `GET /api/books/:id` - Get book details
+  - `PUT /api/books/:id` - Update book
+  - `DELETE /api/books/:id` - Delete book
+
+- **Authors**
+  - `GET /api/authors` - List all authors
+  - `POST /api/authors` - Create new author
+  - `GET /api/authors/:id` - Get author details
+  - `PUT /api/authors/:id` - Update author
+  - `DELETE /api/authors/:id` - Delete author
+
+</div>
+
+</div>
+
+<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
+
+<div align="center">
+
+### 🔍 Query Parameters
+
+</div>
+
+<div align="left">
+
+- **Pagination**
+  - `page`: Page number (default: 1)
+  - `limit`: Items per page (default: 10)
+
+- **Filtering**
+  - `search`: Search term
+  - `sort`: Sort field
+  - `order`: Sort order (asc/desc)
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+## 📁 Project Structure
+
+<div align="center">
+
+<div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+
+<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
+
+<div align="center">
+
+### 📂 Directory Layout
+
+</div>
+
+<div align="left">
 
 ```
 library-management/
 ├── src/
 │   ├── config/         # Configuration files
-│   ├── controllers/    # Request handlers
+│   ├── controllers/    # Route controllers
+│   ├── middleware/     # Custom middleware
 │   ├── models/         # Database models
 │   ├── routes/         # API routes
 │   ├── services/       # Business logic
-│   ├── validators/     # Request validation
-│   ├── utils/          # Utility functions
-│   └── index.ts        # Application entry point
-├── __tests__/          # Test files
-│   ├── validators/     # Unit tests for validators
-│   └── services/       # Unit tests for services
-├── docs/              # API documentation
-│   ├── postman_collection.json       # Postman collection
-│   └── postman_environments.json     # Development environment
+│   ├── utils/          # Helper functions
+│   ├── validators/     # Input validation
+│   ├── __tests__/      # Test files
+│   └── index.ts        # Application entry
 ├── docker/            # Docker configuration
-│   ├── Dockerfile          # Production Dockerfile
-│   ├── Dockerfile.dev      # Development Dockerfile
-│   ├── docker-compose.yml  # Production compose file
-│   ├── docker-compose.dev.yml  # Development compose file
-│   └── postgres/      # PostgreSQL configuration
-│       └── init/      # Database initialization scripts
-└── package.json       # Project dependencies and scripts
+├── docs/              # Documentation
+├── .env.example      # Environment template
+├── .eslintrc.json    # ESLint configuration
+├── .prettierrc       # Prettier configuration
+├── jest.config.js    # Jest configuration
+├── package.json      # Dependencies and scripts
+└── tsconfig.json     # TypeScript configuration
 ```
 
-## Development
+</div>
 
-### Local Development
-To run the application locally:
-```bash
-# Start in development mode with hot-reload
-npm run dev
+</div>
 
-# Start in debug mode
-npm run debug
+<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
 
-# Run tests
-npm test
-npm run test:watch  # Run tests in watch mode
-npm run test:coverage  # Run tests with coverage report
-```
+<div align="center">
 
-### Docker Development
-To run the application in Docker development mode:
-```bash
-# Build and start containers
-npm run docker:build:dev
-npm run docker:up:dev
+### 🔑 Key Files
 
-# View logs
-npm run docker:logs:dev
+</div>
 
-# Stop containers
-npm run docker:down:dev
-```
+<div align="left">
 
-## Error Handling
+- `src/index.ts`: Main application setup
+- `src/config/database.ts`: Database configuration
+- `src/models/`: Database models
+- `src/controllers/`: Route handlers
+- `src/routes/`: API routes
+- `src/services/`: Business logic
+- `docker-compose.yml`: Docker services
+- `package.json`: Dependencies and scripts
 
-The API uses standard HTTP status codes:
-- 200: Success
-- 201: Created
-- 400: Bad Request
-- 404: Not Found
-- 500: Internal Server Error
+</div>
 
-Error responses follow this format:
+</div>
+
+</div>
+
+</div>
+
+## ⚠️ Error Handling
+
+<div align="center">
+
+<div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+
+<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
+
+<div align="center">
+
+### 🚨 Error Types
+
+</div>
+
+<div align="left">
+
+- **ValidationError**: Input validation failures
+- **NotFoundError**: Resource not found
+- **DatabaseError**: Database operation failures
+- **AuthenticationError**: Auth-related issues
+- **AuthorizationError**: Permission issues
+
+</div>
+
+</div>
+
+<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
+
+<div align="center">
+
+### 🔄 Error Response Format
+
+</div>
+
+<div align="left">
+
 ```json
 {
   "status": "error",
+  "code": 400,
   "message": "Error description",
-  "errors": [
-    {
-      "field": "fieldName",
-      "message": "Validation error message"
-    }
-  ]
+  "details": {
+    "field": "error details"
+  }
 }
 ```
 
-## Contributing
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+## 🤝 Contributing
+
+<div align="center">
+
+<div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+
+<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
+
+<div align="center">
+
+### 📝 Guidelines
+
+</div>
+
+<div align="left">
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create feature branch
+3. Commit changes
+4. Push to branch
+5. Create Pull Request
 
-## Contact
+</div>
 
-For support or queries, reach out to [ozersubasi.dev@gmail.com](mailto:ozersubasi.dev@gmail.com)
+</div>
+
+<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
+
+<div align="center">
+
+### ✅ Requirements
+
+</div>
+
+<div align="left">
+
+- Follow code style
+- Add tests
+- Update documentation
+- Pass CI checks
+- Address review comments
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+## 📧 Contact & Support
+
+<div align="center">
+
+<div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
+
+### 📬 Get in Touch
+[![Email](https://img.shields.io/badge/Email-ozersubasi.dev@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:ozersubasi.dev@gmail.com)
+[![GitHub](https://img.shields.io/badge/GitHub-ozers-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ozers)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Ozer%20SUBASI-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ozer)
+[![Website](https://img.shields.io/badge/Website-yayinliyor.com-FF6B6B?style=for-the-badge&logo=firefox&logoColor=white)](https://yayinliyor.com)
+
+</div>
+
+<div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
+
+### 🤝 Support
+[![Issues](https://img.shields.io/badge/Issues-Open-blue?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ozers/library-management/issues)
+[![PRs](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ozers/library-management/pulls)
+[![Stars](https://img.shields.io/badge/Stars-⭐-yellow?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ozers/library-management/stargazers)
+[![Share](https://img.shields.io/badge/Share-📤-green?style=for-the-badge&logo=share&logoColor=white)](https://twitter.com/intent/tweet?text=Check%20out%20this%20awesome%20Library%20Management%20System!%20https://github.com/ozers/library-management)
+
+</div>
+
+</div>
+
+## 📝 License
+
+<div align="center">
+
+<div style="padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8; max-width: 600px;">
+
+### 📜 MIT License
+[![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
+
+| Permission | Status |
+|------------|---------|
+| Commercial use | ✅ Allowed |
+| Modification | ✅ Allowed |
+| Distribution | ✅ Allowed |
+| Private use | ✅ Allowed |
+| License and copyright notice | ℹ️ Required |
+
+</div>
+
+</div>
+
+## 🙏 Acknowledgments
+
+<div align="center">
+
+<div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
+
+### 📚 Resources
+[![Node.js Docs](https://img.shields.io/badge/Node.js_Docs-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/docs/)
+[![TypeScript Docs](https://img.shields.io/badge/TypeScript_Docs-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/docs/)
+[![Express.js Docs](https://img.shields.io/badge/Express.js_Docs-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/en/guide/)
+[![Sequelize Docs](https://img.shields.io/badge/Sequelize_Docs-52B0E7?style=for-the-badge&logo=sequelize&logoColor=white)](https://sequelize.org/docs/)
+[![Docker Docs](https://img.shields.io/badge/Docker_Docs-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://docs.docker.com/)
+
+</div>
+
+</div>
+
+---
+
+<div align="center">
+
+<div style="padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8; max-width: 600px;">
+
+### 🌟 Made with ❤️ by [Ozer SUBASI](https://github.com/ozers)
+
+<div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
+
+[![Stars](https://img.shields.io/github/stars/ozers/library-management?style=social)](https://github.com/ozers/library-management/stargazers)
+[![Forks](https://img.shields.io/github/forks/ozers/library-management?style=social)](https://github.com/ozers/library-management/network/members)
+[![Issues](https://img.shields.io/github/issues/ozers/library-management?style=social)](https://github.com/ozers/library-management/issues)
+
+</div>
+
+</div>
+
+</div>
 

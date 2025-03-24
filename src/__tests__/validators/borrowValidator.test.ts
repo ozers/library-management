@@ -1,7 +1,7 @@
-import * as validator from '../../src/validators/borrowValidator';
-import { ValidationError } from '../../src/validators/borrowValidator';
-import { Book } from '../../src/models/book';
-import { Transaction } from '../../src/models/transaction';
+import * as validator from '../../validators/borrowValidator';
+import { ValidationError } from '../../validators/borrowValidator';
+import { Book } from '../../models/book';
+import { Transaction } from '../../models/transaction';
 
 describe('BorrowValidator', () => {
     describe('ValidationError', () => {

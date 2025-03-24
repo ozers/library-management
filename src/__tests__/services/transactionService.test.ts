@@ -1,12 +1,12 @@
 import { Transaction as SequelizeTransaction } from 'sequelize';
-import { Transaction, TransactionModel } from '../../src/models/transaction';
-import * as transactionService from '../../src/services/transactionService';
-import * as transactionValidator from '../../src/validators/transactionValidator';
+import { Transaction, TransactionModel } from '../../models/transaction';
+import * as transactionService from '../../services/transactionService';
+import * as transactionValidator from '../../validators/transactionValidator';
 
 type TransactionStatus = 'borrowed' | 'returned';
 
 // Mock dependencies
-jest.mock('../../src/models/transaction', () => ({
+jest.mock('../../models/transaction', () => ({
   TransactionModel: {
     create: jest.fn(),
     findOne: jest.fn(),
@@ -16,23 +16,23 @@ jest.mock('../../src/models/transaction', () => ({
   }
 }));
 
-jest.mock('../../src/models/book', () => ({
+jest.mock('../../models/book', () => ({
   BookModel: {
     findByPk: jest.fn(),
     update: jest.fn()
   }
 }));
 
-jest.mock('../../src/models/user', () => ({
+jest.mock('../../models/user', () => ({
   UserModel: {
     findByPk: jest.fn()
   }
 }));
 
-jest.mock('../../src/validators/transactionValidator');
+jest.mock('../../validators/transactionValidator');
 
-jest.mock('../../src/models/transaction');
-jest.mock('../../src/validators/transactionValidator', () => ({
+jest.mock('../../models/transaction');
+jest.mock('../../validators/transactionValidator', () => ({
     validateCreateTransactionParams: jest.fn(),
     validateId: jest.fn(),
     validateUpdateTransactionData: jest.fn()

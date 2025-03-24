@@ -1,22 +1,21 @@
 import { Request, Response, NextFunction } from 'express';
-import { createBookValidationRules, getBookValidationRules, validateBookRequest } from '../../src/validators/bookValidators';
+import { userValidationRules, validateUserRequest } from '../../validators/userValidators';
 import * as expressValidator from 'express-validator';
 
 const chainedValidationMock = {
     trim: jest.fn().mockReturnThis(),
     notEmpty: jest.fn().mockReturnThis(),
     withMessage: jest.fn().mockReturnThis(),
-    isInt: jest.fn().mockReturnThis(),
-    isLength: jest.fn().mockReturnThis()
+    isEmail: jest.fn().mockReturnThis(),
+    normalizeEmail: jest.fn().mockReturnThis()
 };
 
 jest.mock('express-validator', () => ({
     body: jest.fn().mockImplementation(() => chainedValidationMock),
-    param: jest.fn().mockImplementation(() => chainedValidationMock),
     validationResult: jest.fn()
 }));
 
-describe('Book Validators', () => {
+describe('User Validators', () => {
     let mockRequest: Partial<Request>;
     let mockResponse: Partial<Response>;
     let nextFunction: NextFunction;
@@ -33,26 +32,35 @@ describe('Book Validators', () => {
         jest.clearAllMocks();
     });
 
-    describe('createBookValidationRules', () => {
+    describe('userValidationRules', () => {
         it('should return validation rules array', () => {
-            const rules = createBookValidationRules();
+            const rules = userValidationRules();
             expect(Array.isArray(rules)).toBe(true);
-            expect(rules.length).toBe(1); // name
+            expect(rules.length).toBe(2); // name and email rules
         });
 
         it('should include name validation rules', () => {
-            createBookValidationRules();
+            userValidationRules();
             expect(expressValidator.body).toHaveBeenCalledWith('name');
             expect(chainedValidationMock.trim).toHaveBeenCalled();
             expect(chainedValidationMock.notEmpty).toHaveBeenCalled();
-            expect(chainedValidationMock.isLength).toHaveBeenCalledWith({ min: 1, max: 255 });
             expect(chainedValidationMock.withMessage).toHaveBeenCalledWith('Name is required');
-            expect(chainedValidationMock.withMessage).toHaveBeenCalledWith('Name must be between 1 and 255 characters');
+        });
+
+        it('should include email validation rules', () => {
+            userValidationRules();
+            expect(expressValidator.body).toHaveBeenCalledWith('email');
+            expect(chainedValidationMock.trim).toHaveBeenCalled();
+            expect(chainedValidationMock.notEmpty).toHaveBeenCalled();
+            expect(chainedValidationMock.isEmail).toHaveBeenCalled();
+            expect(chainedValidationMock.normalizeEmail).toHaveBeenCalled();
+            expect(chainedValidationMock.withMessage).toHaveBeenCalledWith('Email is required');
         });
 
         it('should handle whitespace-only name values', () => {
             mockRequest.body = {
-                name: '   '
+                name: '   ',
+                email: 'test@example.com'
             };
             const mockValidationResult = {
                 isEmpty: () => false,
@@ -60,7 +68,7 @@ describe('Book Validators', () => {
             };
             (expressValidator.validationResult as unknown as jest.Mock).mockReturnValue(mockValidationResult);
 
-            validateBookRequest(
+            validateUserRequest(
                 mockRequest as Request,
                 mockResponse as Response,
                 nextFunction
@@ -72,17 +80,18 @@ describe('Book Validators', () => {
             });
         });
 
-        it('should handle empty name value', () => {
+        it('should handle invalid email format', () => {
             mockRequest.body = {
-                name: ''
+                name: 'Test User',
+                email: 'invalid-email'
             };
             const mockValidationResult = {
                 isEmpty: () => false,
-                array: () => [{ msg: 'Name is required', param: 'name' }]
+                array: () => [{ msg: 'Email is required', param: 'email' }]
             };
             (expressValidator.validationResult as unknown as jest.Mock).mockReturnValue(mockValidationResult);
 
-            validateBookRequest(
+            validateUserRequest(
                 mockRequest as Request,
                 mockResponse as Response,
                 nextFunction
@@ -90,91 +99,35 @@ describe('Book Validators', () => {
 
             expect(mockResponse.status).toHaveBeenCalledWith(400);
             expect(mockResponse.json).toHaveBeenCalledWith({
-                errors: [{ msg: 'Name is required', param: 'name' }]
+                errors: [{ msg: 'Email is required', param: 'email' }]
+            });
+        });
+
+        it('should handle empty email value', () => {
+            mockRequest.body = {
+                name: 'Test User',
+                email: ''
+            };
+            const mockValidationResult = {
+                isEmpty: () => false,
+                array: () => [{ msg: 'Email is required', param: 'email' }]
+            };
+            (expressValidator.validationResult as unknown as jest.Mock).mockReturnValue(mockValidationResult);
+
+            validateUserRequest(
+                mockRequest as Request,
+                mockResponse as Response,
+                nextFunction
+            );
+
+            expect(mockResponse.status).toHaveBeenCalledWith(400);
+            expect(mockResponse.json).toHaveBeenCalledWith({
+                errors: [{ msg: 'Email is required', param: 'email' }]
             });
         });
     });
 
-    describe('getBookValidationRules', () => {
-        it('should return validation rules array', () => {
-            const rules = getBookValidationRules();
-            expect(Array.isArray(rules)).toBe(true);
-            expect(rules.length).toBe(1); // id
-        });
-
-        it('should include id validation rules', () => {
-            getBookValidationRules();
-            expect(expressValidator.param).toHaveBeenCalledWith('id');
-            expect(chainedValidationMock.isInt).toHaveBeenCalled();
-            expect(chainedValidationMock.withMessage).toHaveBeenCalledWith('Book ID must be an integer');
-        });
-
-        it('should handle negative ID values', () => {
-            mockRequest.params = {
-                id: '-1'
-            };
-            const mockValidationResult = {
-                isEmpty: () => false,
-                array: () => [{ msg: 'Book ID must be an integer', param: 'id' }]
-            };
-            (expressValidator.validationResult as unknown as jest.Mock).mockReturnValue(mockValidationResult);
-
-            validateBookRequest(
-                mockRequest as Request,
-                mockResponse as Response,
-                nextFunction
-            );
-
-            expect(mockResponse.status).toHaveBeenCalledWith(400);
-            expect(mockResponse.json).toHaveBeenCalledWith({
-                errors: [{ msg: 'Book ID must be an integer', param: 'id' }]
-            });
-        });
-
-        it('should handle non-integer ID values', () => {
-            mockRequest.params = {
-                id: 'abc'
-            };
-            const mockValidationResult = {
-                isEmpty: () => false,
-                array: () => [{ msg: 'Book ID must be an integer', param: 'id' }]
-            };
-            (expressValidator.validationResult as unknown as jest.Mock).mockReturnValue(mockValidationResult);
-
-            validateBookRequest(
-                mockRequest as Request,
-                mockResponse as Response,
-                nextFunction
-            );
-
-            expect(mockResponse.status).toHaveBeenCalledWith(400);
-            expect(mockResponse.json).toHaveBeenCalledWith({
-                errors: [{ msg: 'Book ID must be an integer', param: 'id' }]
-            });
-        });
-
-        it('should handle missing ID parameter', () => {
-            mockRequest.params = {};
-            const mockValidationResult = {
-                isEmpty: () => false,
-                array: () => [{ msg: 'Book ID must be an integer', param: 'id' }]
-            };
-            (expressValidator.validationResult as unknown as jest.Mock).mockReturnValue(mockValidationResult);
-
-            validateBookRequest(
-                mockRequest as Request,
-                mockResponse as Response,
-                nextFunction
-            );
-
-            expect(mockResponse.status).toHaveBeenCalledWith(400);
-            expect(mockResponse.json).toHaveBeenCalledWith({
-                errors: [{ msg: 'Book ID must be an integer', param: 'id' }]
-            });
-        });
-    });
-
-    describe('validateBookRequest', () => {
+    describe('validateUserRequest', () => {
         it('should call next() when no validation errors', () => {
             const mockValidationResult = {
                 isEmpty: () => true,
@@ -182,7 +135,7 @@ describe('Book Validators', () => {
             };
             (expressValidator.validationResult as unknown as jest.Mock).mockReturnValue(mockValidationResult);
 
-            validateBookRequest(
+            validateUserRequest(
                 mockRequest as Request,
                 mockResponse as Response,
                 nextFunction
@@ -196,7 +149,7 @@ describe('Book Validators', () => {
         it('should return 400 status with errors when validation fails', () => {
             const mockErrors = [
                 { msg: 'Name is required', param: 'name' },
-                { msg: 'Name must be between 1 and 255 characters', param: 'name' }
+                { msg: 'Email is required', param: 'email' }
             ];
             const mockValidationResult = {
                 isEmpty: () => false,
@@ -204,7 +157,7 @@ describe('Book Validators', () => {
             };
             (expressValidator.validationResult as unknown as jest.Mock).mockReturnValue(mockValidationResult);
 
-            validateBookRequest(
+            validateUserRequest(
                 mockRequest as Request,
                 mockResponse as Response,
                 nextFunction
@@ -224,7 +177,7 @@ describe('Book Validators', () => {
             };
             (expressValidator.validationResult as unknown as jest.Mock).mockReturnValue(mockValidationResult);
 
-            validateBookRequest(
+            validateUserRequest(
                 mockRequest as Request,
                 mockResponse as Response,
                 nextFunction

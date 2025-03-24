@@ -1,5 +1,5 @@
-import * as validator from '../../src/validators/transactionValidator';
-import { Transaction } from '../../src/models/transaction';
+import * as validator from '../../validators/transactionValidator';
+import { Transaction } from '../../models/transaction';
 
 describe('TransactionValidator', () => {
     describe('validateCreateTransactionParams', () => {

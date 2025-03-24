@@ -1,8 +1,8 @@
-import { UserModel, UserCreationAttributes } from '../../src/models/user';
-import { findAllUsers, findUserById, createUser } from '../../src/services/userService';
+import { UserModel, UserCreationAttributes } from '../../models/user';
+import { findAllUsers, findUserById, createUser } from '../../services/userService';
 
 // Mock UserModel
-jest.mock('../../src/models/user', () => ({
+jest.mock('../../models/user', () => ({
   UserModel: {
     create: jest.fn(),
     findAll: jest.fn(),

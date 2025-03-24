@@ -1,9 +1,9 @@
-import { BookModel, BookCreationAttributes } from '../../src/models/book';
-import { createBook, calculateBookRating, findAllBooks, findBookById } from '../../src/services/bookService';
+import { BookModel, BookCreationAttributes } from '../../models/book';
+import { createBook, calculateBookRating, findAllBooks, findBookById } from '../../services/bookService';
 import { Transaction } from 'sequelize';
 
 // Mock BookModel
-jest.mock('../../src/models/book', () => ({
+jest.mock('../../models/book', () => ({
   BookModel: {
     create: jest.fn(),
     findAll: jest.fn(),
