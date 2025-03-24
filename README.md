@@ -117,6 +117,26 @@ Test files are organized as follows:
 - `__tests__/validators/`: Unit tests for request validators
 - `__tests__/services/`: Unit tests for business logic services
 
+### Coverage Report
+
+After running `npm run test:coverage`, a detailed coverage report will be generated in the `coverage/` directory. The report includes:
+
+- Statement coverage: Percentage of code statements executed
+- Branch coverage: Percentage of code branches executed
+- Function coverage: Percentage of functions called
+- Line coverage: Percentage of code lines executed
+
+To view the coverage report:
+1. Open `coverage/lcov-report/index.html` in your browser
+2. Navigate through the report to see coverage details for each file
+3. Click on individual files to see line-by-line coverage information
+
+The coverage report helps identify:
+- Untested code paths
+- Missing test cases
+- Areas that need additional testing
+- Overall test coverage quality
+
 ## API Documentation
 
 The API is available at `http://localhost:3000` (or your configured `baseUrl`)
