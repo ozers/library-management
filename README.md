@@ -46,9 +46,7 @@
 
 ## ✨ Key Features
 
-<div align="center">
-
-<div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+<div style="display: flex; justify-content: flex-start; gap: 2rem; flex-wrap: wrap;">
 
 <div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
 
@@ -145,9 +143,7 @@
 
 ## 🚀 Tech Stack
 
-<div align="center">
-
-<div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+<div style="display: flex; justify-content: flex-start; gap: 2rem; flex-wrap: wrap;">
 
 <div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
 
@@ -201,9 +197,7 @@
 
 ## 📋 Prerequisites
 
-<div align="center">
-
-<div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+<div style="display: flex; justify-content: flex-start; gap: 2rem; flex-wrap: wrap;">
 
 <div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
 
@@ -252,8 +246,6 @@
 </div>
 
 ## 🛠️ Installation
-
-<div align="center">
 
 <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
 
@@ -318,11 +310,7 @@ npm run docker:build
 npm run docker:up
 ```
 
-<div align="center">
-
 ### 🔍 Step 4: Verify
-
-</div>
 
 - Check logs: `npm run docker:logs:dev`
 - Stop service: `npm run docker:down:dev`
@@ -337,9 +325,7 @@ npm run docker:up
 
 ## 🧪 Testing
 
-<div align="center">
-
-<div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+<div style="display: flex; justify-content: flex-start; gap: 2rem; flex-wrap: wrap;">
 
 <div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
 
@@ -385,9 +371,7 @@ npm run docker:up
 
 ## 📚 API Documentation
 
-<div align="center">
-
-<div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+<div style="display: flex; justify-content: flex-start; gap: 2rem; flex-wrap: wrap;">
 
 <div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
 
@@ -446,9 +430,7 @@ npm run docker:up
 
 ## 📁 Project Structure
 
-<div align="center">
-
-<div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+<div style="display: flex; justify-content: flex-start; gap: 2rem; flex-wrap: wrap;">
 
 <div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
 
@@ -516,9 +498,7 @@ library-management/
 
 ## ⚠️ Error Handling
 
-<div align="center">
-
-<div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+<div style="display: flex; justify-content: flex-start; gap: 2rem; flex-wrap: wrap;">
 
 <div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
 
@@ -569,11 +549,9 @@ library-management/
 
 </div>
 
-## 🤝 Contributing
+## 📝 Contributing
 
-<div align="center">
-
-<div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+<div style="display: flex; justify-content: flex-start; gap: 2rem; flex-wrap: wrap;">
 
 <div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
 
