@@ -32,112 +32,22 @@
 
 <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
 
-[Getting Started](#-getting-started) •
-[Features](#-features) •
-[Installation](#%EF%B8%8F-installation) •
-[Documentation](#-documentation) •
-[Contributing](#-contributing)
+[Tech Stack](#-tech-stack) •
+[Key Features](#-key-features) •
+[Prerequisites](#-prerequisites) •
+[Installation](#-installation) •
+[Testing](#-testing) •
+[API Documentation](#-api-documentation) •
+[Project Structure](#-project-structure) •
+[Error Handling](#-error-handling) •
+[Contributing](#-contributing) •
+[Contact & Support](#-contact--support) •
+[License](#-license) •
+[Acknowledgments](#-acknowledgments)
 
 </div>
 
 ---
-
-</div>
-
-## ✨ Key Features
-
-<div style="display: flex; justify-content: flex-start; gap: 2rem; flex-wrap: wrap;">
-
-<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
-
-<div align="center">
-
-### 📚 Book Management
-
-</div>
-
-<div align="left">
-
-- 📖 Smart Cataloging
-  - Intuitive book addition system
-  - Real-time availability tracking
-  - Dynamic rating management
-  - Comprehensive book details
-  - Advanced search capabilities
-  - Category organization
-
-</div>
-
-</div>
-
-<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
-
-<div align="center">
-
-### 👥 User Management
-
-</div>
-
-<div align="left">
-
-- 👤 User Experience
-  - Seamless user registration
-  - Detailed user profiles
-  - Complete borrowing history
-  - Personalized recommendations
-  - Activity monitoring
-  - Preference settings
-
-</div>
-
-</div>
-
-<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
-
-<div align="center">
-
-### 🔄 Borrowing System
-
-</div>
-
-<div align="left">
-
-- 📅 Smart Operations
-  - One-click book borrowing
-  - Rating-enabled returns
-  - Transaction tracking
-  - Availability management
-  - Overdue notifications
-  - Reservation system
-
-</div>
-
-</div>
-
-<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
-
-<div align="center">
-
-### 🛠️ Technical Features
-
-</div>
-
-<div align="left">
-
-- ⚙️ Robust Architecture
-  - TypeScript type safety
-  - PostgreSQL with Sequelize
-  - Docker containerization
-  - Comprehensive testing
-  - RESTful API design
-  - Input validation
-  - Environment config
-
-</div>
-
-</div>
-
-</div>
 
 </div>
 
@@ -245,7 +155,104 @@
 
 </div>
 
-## 🛠️ Installation
+## ✨ Key Features
+
+<div style="display: flex; justify-content: flex-start; gap: 2rem; flex-wrap: wrap;">
+
+<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
+
+<div align="center">
+
+### 📚 Book Management
+
+</div>
+
+<div align="left">
+
+- 📖 Smart Cataloging
+  - Intuitive book addition system
+  - Real-time availability tracking
+  - Dynamic rating management
+  - Comprehensive book details
+  - Advanced search capabilities
+  - Category organization
+
+</div>
+
+</div>
+
+<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
+
+<div align="center">
+
+### 👥 User Management
+
+</div>
+
+<div align="left">
+
+- 👤 User Experience
+  - Seamless user registration
+  - Detailed user profiles
+  - Complete borrowing history
+  - Personalized recommendations
+  - Activity monitoring
+  - Preference settings
+
+</div>
+
+</div>
+
+<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
+
+<div align="center">
+
+### 🔄 Borrowing System
+
+</div>
+
+<div align="left">
+
+- 📅 Smart Operations
+  - One-click book borrowing
+  - Rating-enabled returns
+  - Transaction tracking
+  - Availability management
+  - Overdue notifications
+  - Reservation system
+
+</div>
+
+</div>
+
+<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
+
+<div align="center">
+
+### 🛠️ Technical Features
+
+</div>
+
+<div align="left">
+
+- ⚙️ Robust Architecture
+  - TypeScript type safety
+  - PostgreSQL with Sequelize
+  - Docker containerization
+  - Comprehensive testing
+  - RESTful API design
+  - Input validation
+  - Environment config
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+## 🛠 Installation
 
 <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
 
@@ -505,7 +512,7 @@ library-management/
 
 </div>
 
-## ⚠️ Error Handling
+## ⚠ Error Handling
 
 <div style="display: flex; justify-content: flex-start; gap: 2rem; flex-wrap: wrap;">
 
