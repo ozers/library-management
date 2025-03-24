@@ -2,6 +2,7 @@ import { Transaction, TransactionModel, TransactionCreationAttributes } from "..
 import { Book, BookModel } from "../models/book";
 import sequelize from '../config/database';
 import * as bookService from "./bookService";
+import * as validator from "../validators/borrowValidator";
 
 export interface BorrowResult {
     message: string;
@@ -13,6 +14,9 @@ export const findTransactionByBookAndUser = async (
     userId: number,
     transaction?: any
 ): Promise<Transaction | null> => {
+    validator.validateId(bookId, 'Book');
+    validator.validateId(userId, 'User');
+
     const result = await TransactionModel.findOne({
         where: {
             bookId,
@@ -29,12 +33,17 @@ export const borrowBook = async (
     bookId: number
 ): Promise<BorrowResult> => {
     try {
+        validator.validateId(userId, 'User');
+        validator.validateId(bookId, 'Book');
+
         return await sequelize.transaction(async (t) => {
             const book = await bookService.findBookById(bookId, t);
 
             if (!book || !book.available) {
                 throw new Error('Book is not available for borrowing');
             }
+
+            validator.validateBookData(book);
 
             await BookModel.update(
                 { available: false },
@@ -51,10 +60,12 @@ export const borrowBook = async (
             };
 
             const transactionRecord = await TransactionModel.create(transactionData, { transaction: t });
+            const transactionJson = transactionRecord.toJSON() as Transaction;
+            validator.validateTransactionData(transactionJson);
 
             return {
                 message: "Book borrowed successfully",
-                transaction: transactionRecord.toJSON() as Transaction
+                transaction: transactionJson
             };
         });
     } catch (error) {
@@ -68,6 +79,10 @@ export const returnBook = async (
     score: number
 ): Promise<BorrowResult> => {
     try {
+        validator.validateId(userId, 'User');
+        validator.validateId(bookId, 'Book');
+        validator.validateRating(score);
+
         return await sequelize.transaction(async (t) => {
             const transaction = await findTransactionByBookAndUser(bookId, userId, t);
             if (!transaction) {
@@ -77,6 +92,8 @@ export const returnBook = async (
             if (transaction.returnDate) {
                 throw new Error('This book has already been returned');
             }
+
+            validator.validateTransactionData(transaction);
 
             await TransactionModel.update(
                 {
@@ -94,6 +111,8 @@ export const returnBook = async (
             if (!book) {
                 throw new Error('Book not found');
             }
+
+            validator.validateBookData(book);
 
             const currentAverageRating = book.averageRating ?? 0;
             const newRating = bookService.calculateBookRating(score, currentAverageRating, book.borrowCount);
@@ -115,9 +134,12 @@ export const returnBook = async (
                 throw new Error('Failed to retrieve updated transaction');
             }
 
+            const updatedTransactionJson = updatedTransaction.toJSON() as Transaction;
+            validator.validateTransactionData(updatedTransactionJson);
+
             return {
                 message: "Book returned successfully",
-                transaction: updatedTransaction.toJSON() as Transaction
+                transaction: updatedTransactionJson
             };
         });
     } catch (error) {
