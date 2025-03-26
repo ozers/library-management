@@ -32,18 +32,11 @@
 
 <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
 
-[Tech Stack](#-tech-stack) •
-[Key Features](#-key-features) •
-[Prerequisites](#-prerequisites) •
+[Quick Start](#-quick-start) •
+[Features](#-features) •
 [Installation](#-installation) •
-[Testing](#-testing) •
-[API Documentation](#-api-documentation) •
-[Project Structure](#-project-structure) •
-[Error Handling](#-error-handling) •
-[Contributing](#-contributing) •
-[Contact & Support](#-contact--support) •
-[License](#-license) •
-[Acknowledgments](#-acknowledgments)
+[API](#-api) •
+[Contributing](#-contributing)
 
 </div>
 
@@ -51,202 +44,75 @@
 
 </div>
 
-## 🚀 Tech Stack
+## 🚀 Quick Start
+
+```bash
+# Clone & Install
+git clone https://github.com/ozers/library-management.git
+cd library-management
+cp .env.example .env
+npm install
+
+# Start with Docker (Development)
+docker-compose -f docker-compose.dev.yml up --build
+
+# Or start without Docker
+npm run dev
+
+# Visit: http://localhost:3000
+```
+
+## 📊 System Architecture
+
+```mermaid
+graph TD
+    Client[Client] -->|HTTP Request| Express[Express.js]
+    Express -->|Route| Controller[Controllers]
+    Controller -->|Validate| Validator[Validators]
+    Controller -->|Process| Service[Services]
+    Service -->|Query| Model[Models]
+    Model -->|Store| DB[(PostgreSQL)]
+    Controller -->|Response| Client
+
+    style Client fill:#f9f,stroke:#333,stroke-width:2px
+    style Express fill:#ff9900,stroke:#333,stroke-width:2px
+    style Controller fill:#ff9900,stroke:#333,stroke-width:2px
+    style Service fill:#ff9900,stroke:#333,stroke-width:2px
+    style Model fill:#ff9900,stroke:#333,stroke-width:2px
+    style DB fill:#ff9900,stroke:#333,stroke-width:2px
+```
+
+## ✨ Features
 
 <div style="display: flex; justify-content: flex-start; gap: 2rem; flex-wrap: wrap;">
 
 <div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
-
-<div align="center">
-
-### 🔧 Backend & Database
-
-</div>
-
-<div align="left">
-
-- 🟦 Core Technologies
-  - Node.js with TypeScript
-  - Express.js framework
-  - PostgreSQL database
-  - Sequelize ORM
-  - Jest testing suite
-  - Express-validator
-  - Dotenv configuration
-
-</div>
-
-</div>
-
-<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
-
-<div align="center">
-
-### 🔨 DevOps & Tools
-
-</div>
-
-<div align="left">
-
-- 🐳 Infrastructure
-  - Docker & Docker Compose
-  - GitHub Actions CI/CD
-  - ESLint & Prettier
-  - Git version control
-  - Postman API testing
-  - PostgreSQL tools
-  - Environment management
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-## 📋 Prerequisites
-
-<div style="display: flex; justify-content: flex-start; gap: 2rem; flex-wrap: wrap;">
-
-<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
-
-<div align="center">
-
-### 🛠️ Required Tools
-
-</div>
-
-<div align="left">
-
-- **Node.js** (v14 or higher)
-- **npm** (v6 or higher)
-- **Docker & Docker Compose**
-- **Git**
-- **PostgreSQL client tools**
-- **Postman** (for API testing)
-
-</div>
-
-</div>
-
-<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
-
-<div align="center">
-
-### 💡 Recommended
-
-</div>
-
-<div align="left">
-
-- VS Code with extensions:
-  - ESLint
-  - Prettier
-  - Docker
-  - TypeScript
-  - PostgreSQL
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-## ✨ Key Features
-
-<div style="display: flex; justify-content: flex-start; gap: 2rem; flex-wrap: wrap;">
-
-<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
-
-<div align="center">
 
 ### 📚 Book Management
-
-</div>
-
-<div align="left">
-
-- 📖 Smart Cataloging
-  - Intuitive book addition system
-  - Real-time availability tracking
-  - Dynamic rating management
-  - Comprehensive book details
-  - Advanced search capabilities
-  - Category organization
-
-</div>
+- Smart cataloging system
+- Real-time availability tracking
+- Advanced search capabilities
+- Category organization
 
 </div>
 
 <div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
-
-<div align="center">
 
 ### 👥 User Management
-
-</div>
-
-<div align="left">
-
-- 👤 User Experience
-  - Seamless user registration
-  - Detailed user profiles
-  - Complete borrowing history
-  - Personalized recommendations
-  - Activity monitoring
-  - Preference settings
-
-</div>
+- Seamless registration
+- Detailed profiles
+- Activity monitoring
+- Preference settings
 
 </div>
 
 <div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
-
-<div align="center">
 
 ### 🔄 Borrowing System
-
-</div>
-
-<div align="left">
-
-- 📅 Smart Operations
-  - One-click book borrowing
-  - Rating-enabled returns
-  - Transaction tracking
-  - Availability management
-  - Overdue notifications
-  - Reservation system
-
-</div>
-
-</div>
-
-<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
-
-<div align="center">
-
-### 🛠️ Technical Features
-
-</div>
-
-<div align="left">
-
-- ⚙️ Robust Architecture
-  - TypeScript type safety
-  - PostgreSQL with Sequelize
-  - Docker containerization
-  - Comprehensive testing
-  - RESTful API design
-  - Input validation
-  - Environment config
-
-</div>
-
-</div>
+- One-click borrowing
+- Rating-enabled returns
+- Overdue notifications
+- Reservation system
 
 </div>
 
@@ -254,312 +120,64 @@
 
 ## 🛠 Installation
 
-<div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+<div style="display: flex; justify-content: flex-start; gap: 2rem; flex-wrap: wrap;">
 
 <div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
 
-<div align="center">
-
-### 📥 Step 1: Clone & Setup
-
-</div>
-
-```bash
-# Clone the repository
-git clone https://github.com/ozers/library-management.git
-cd library-management
-
-# Copy environment file
-cp .env.example .env
-```
-
-<div align="center">
-
-### ⚙️ Step 2: Configure
+### Prerequisites
+- Node.js (v14+)
+- Docker & Docker Compose
+- PostgreSQL
+- Git
 
 </div>
 
+<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
+
+### Environment Setup
 ```env
-# Database Configuration
 DB_HOST=db
 DB_PORT=5432
 DB_NAME=library_db
 DB_USER=postgres
 DB_PASSWORD=postgres
-
-# Node Environment
 NODE_ENV=development
-
-# Server Configuration
 PORT=3000
 ```
 
 </div>
 
-<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
-
-<div align="center">
-
-### 📦 Step 3: Install & Run
-
 </div>
 
-```bash
-# Install dependencies
-npm install
-
-# Development mode
-npm run docker:build:dev
-npm run docker:up:dev
-
-# Production mode
-npm run docker:build
-npm run docker:up
-```
-
-### 🔍 Step 4: Verify
-
-- Check logs: `npm run docker:logs:dev`
-- Stop service: `npm run docker:down:dev`
-- Visit: `http://localhost:3000`
-- Test API: Use Postman collection
-
-</div>
-
-</div>
-
-</div>
-
-## 🧪 Testing
+## 📚 API Endpoints
 
 <div style="display: flex; justify-content: flex-start; gap: 2rem; flex-wrap: wrap;">
 
 <div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
 
-<div align="center">
-
-### 🧪 Test Suite
-
-</div>
-
-<div align="left">
-
-- **Unit Tests**: `npm test`
-- **Integration Tests**: `npm run test:integration`
-- **Coverage Report**: `npm run test:coverage`
-- **Watch Mode**: `npm run test:watch`
-
-</div>
+### Books
+- `GET /api/books` - List all books
+- `GET /api/books/:id` - Get book details
+- `POST /api/books` - Create new book
 
 </div>
 
 <div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
 
-<div align="center">
-
-### 📊 Test Coverage
-
-</div>
-
-<div align="left">
-
-- Unit Tests: 90%+
-- Integration Tests: 85%+
-- API Tests: 95%+
-- Database Tests: 100%
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-## 📚 API Documentation
-
-<div style="display: flex; justify-content: flex-start; gap: 2rem; flex-wrap: wrap;">
-
-<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
-
-<div align="center">
-
-### 📖 Endpoints
-
-</div>
-
-<div align="left">
-
-- **Books** (`/api/books`)
-  - `GET /` - List all books
-  - `GET /:id` - Get book details
-  - `POST /` - Create new book
-
-- **Users** (`/api/users`)
-  - `GET /` - List all users
-  - `GET /:id` - Get user details
-  - `POST /` - Create new user
-
-- **Borrowing & Returns** (`/api/borrow`)
-  - `POST /:userId/borrow/:bookId` - Borrow a book
-  - `POST /:userId/return/:bookId` - Return a book with optional rating
-
-- **Transactions** (`/api/transactions`)
-  - `GET /user/:userId` - Get user's transactions
-  - `GET /:id` - Get transaction details
-
-</div>
+### Users
+- `GET /api/users` - List all users
+- `GET /api/users/:id` - Get user details
+- `POST /api/users` - Create new user
 
 </div>
 
 <div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
 
-<div align="center">
-
-### 🔍 Query Parameters
-
-</div>
-
-<div align="left">
-
-- **Pagination**
-  - `page`: Page number (default: 1)
-  - `limit`: Items per page (default: 10)
-
-- **Filtering**
-  - `search`: Search term
-  - `sort`: Sort field (e.g., 'name', 'createdAt', 'returnDate')
-  - `order`: Sort order ('asc' or 'desc')
-  - `status`: Filter by status ('active', 'returned', 'overdue')
-  - `available`: Filter by availability (for books)
-  - `rating`: Filter by rating (1-5)
-  - `fromDate`: Filter from date
-  - `toDate`: Filter to date
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-## 📁 Project Structure
-
-<div style="display: flex; justify-content: flex-start; gap: 2rem; flex-wrap: wrap;">
-
-<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
-
-<div align="center">
-
-### 📂 Directory Layout
-
-</div>
-
-<div align="left">
-
-```
-library-management/
-├── src/
-│   ├── config/         # Configuration files
-│   ├── controllers/    # Route controllers
-│   ├── middleware/     # Custom middleware
-│   ├── models/         # Database models
-│   ├── routes/         # API routes
-│   ├── services/       # Business logic
-│   ├── utils/          # Helper functions
-│   ├── validators/     # Input validation
-│   ├── __tests__/      # Test files
-│   └── index.ts        # Application entry
-├── docker/            # Docker configuration
-├── docs/              # Documentation
-├── .env.example      # Environment template
-├── .eslintrc.json    # ESLint configuration
-├── .prettierrc       # Prettier configuration
-├── jest.config.js    # Jest configuration
-├── package.json      # Dependencies and scripts
-└── tsconfig.json     # TypeScript configuration
-```
-
-</div>
-
-</div>
-
-<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
-
-<div align="center">
-
-### 🔑 Key Files
-
-</div>
-
-<div align="left">
-
-- `src/index.ts`: Main application setup
-- `src/config/database.ts`: Database configuration
-- `src/models/`: Database models
-- `src/controllers/`: Route handlers
-- `src/routes/`: API routes
-- `src/services/`: Business logic
-- `docker-compose.yml`: Docker services
-- `package.json`: Dependencies and scripts
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-## ⚠ Error Handling
-
-<div style="display: flex; justify-content: flex-start; gap: 2rem; flex-wrap: wrap;">
-
-<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
-
-<div align="center">
-
-### 🚨 Error Types
-
-</div>
-
-<div align="left">
-
-- **ValidationError**: Input validation failures
-- **NotFoundError**: Resource not found
-- **DatabaseError**: Database operation failures
-- **AuthenticationError**: Auth-related issues
-- **AuthorizationError**: Permission issues
-
-</div>
-
-</div>
-
-<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
-
-<div align="center">
-
-### 🔄 Error Response Format
-
-</div>
-
-<div align="left">
-
-```json
-{
-  "status": "error",
-  "code": 400,
-  "message": "Error description",
-  "details": {
-    "field": "error details"
-  }
-}
-```
-
-</div>
-
-</div>
+### Borrowing & Transactions
+- `POST /api/borrow/:userId/borrow/:bookId` - Borrow a book
+- `POST /api/borrow/:userId/return/:bookId` - Return a book
+- `GET /api/transactions/user/:userId` - Get user's transactions
+- `GET /api/transactions/:id` - Get transaction details
 
 </div>
 
@@ -567,51 +185,11 @@ library-management/
 
 ## 📝 Contributing
 
-<div style="display: flex; justify-content: flex-start; gap: 2rem; flex-wrap: wrap;">
-
-<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
-
-<div align="center">
-
-### 📝 Guidelines
-
-</div>
-
-<div align="left">
-
 1. Fork the repository
 2. Create feature branch
 3. Commit changes
 4. Push to branch
 5. Create Pull Request
-
-</div>
-
-</div>
-
-<div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 8px; border: 1px solid #e1e4e8;">
-
-<div align="center">
-
-### ✅ Requirements
-
-</div>
-
-<div align="left">
-
-- Follow code style
-- Add tests
-- Update documentation
-- Pass CI checks
-- Address review comments
-
-</div>
-
-</div>
-
-</div>
-
-</div>
 
 ## 📧 Contact & Support
 
@@ -619,21 +197,10 @@ library-management/
 
 <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
 
-### 📬 Get in Touch
 [![Email](https://img.shields.io/badge/Email-ozersubasi.dev@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:ozersubasi.dev@gmail.com)
 [![GitHub](https://img.shields.io/badge/GitHub-ozers-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ozers)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Ozer%20SUBASI-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ozer)
 [![Website](https://img.shields.io/badge/Website-yayinliyor.com-FF6B6B?style=for-the-badge&logo=firefox&logoColor=white)](https://yayinliyor.com)
-
-</div>
-
-<div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
-
-### 🤝 Support
-[![Issues](https://img.shields.io/badge/Issues-Open-blue?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ozers/library-management/issues)
-[![PRs](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ozers/library-management/pulls)
-[![Stars](https://img.shields.io/badge/Stars-⭐-yellow?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ozers/library-management/stargazers)
-[![Share](https://img.shields.io/badge/Share-📤-green?style=for-the-badge&logo=share&logoColor=white)](https://twitter.com/intent/tweet?text=Check%20out%20this%20awesome%20Library%20Management%20System!%20https://github.com/ozers/library-management)
 
 </div>
 
@@ -647,31 +214,6 @@ library-management/
 
 ### 📜 MIT License
 [![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
-
-| Permission | Status |
-|------------|---------|
-| Commercial use | ✅ Allowed |
-| Modification | ✅ Allowed |
-| Distribution | ✅ Allowed |
-| Private use | ✅ Allowed |
-| License and copyright notice | ℹ️ Required |
-
-</div>
-
-</div>
-
-## 🙏 Acknowledgments
-
-<div align="center">
-
-<div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
-
-### 📚 Resources
-[![Node.js Docs](https://img.shields.io/badge/Node.js_Docs-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/docs/)
-[![TypeScript Docs](https://img.shields.io/badge/TypeScript_Docs-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/docs/)
-[![Express.js Docs](https://img.shields.io/badge/Express.js_Docs-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/en/guide/)
-[![Sequelize Docs](https://img.shields.io/badge/Sequelize_Docs-52B0E7?style=for-the-badge&logo=sequelize&logoColor=white)](https://sequelize.org/docs/)
-[![Docker Docs](https://img.shields.io/badge/Docker_Docs-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://docs.docker.com/)
 
 </div>
 
